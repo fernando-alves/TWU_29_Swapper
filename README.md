@@ -1,5 +1,6 @@
 twu_29_Swapper
 =====
+For the firsttime you should set a remote origin:
 
 Development Environment Setup
 -----------------------------
