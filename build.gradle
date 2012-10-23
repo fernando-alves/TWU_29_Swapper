@@ -20,7 +20,10 @@ dependencies {
             'org.freemarker:freemarker:2.3.19',
             'ch.qos.logback:logback-classic:1.0.0',
             'commons-lang:commons-lang:2.6',
-            'hsqldb:hsqldb:1.8.0.10'
+            'hsqldb:hsqldb:1.8.0.10',
+            'org.jasig.cas:cas-client-core:3.1.9',
+    'org.springframework.security:spring-security-core:3.1.2.RELEASE'
+
 
 
     testCompile 'junit:junit:4.10',

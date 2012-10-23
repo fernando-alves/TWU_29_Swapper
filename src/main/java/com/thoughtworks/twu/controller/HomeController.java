@@ -23,8 +23,7 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("example/home");
         if (!username.isEmpty()) {
             User user = userService.getUser(username);
-            modelAndView.addObject("user", user)
-                    .addObject("username", username);
+            modelAndView.addObject("user", user).addObject("username", username);
         }
         return modelAndView;
     }
