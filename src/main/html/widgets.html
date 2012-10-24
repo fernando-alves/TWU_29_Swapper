@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Widgets</title>
+		<style type="text/css" media="screen">
+			body {
+				padding: 50px;
+			}
+		  #container {
+				width: 600px;
+				height: 100px;
+				border: 1px solid #333;
+				margin: auto;
+				background: #CCC;
+			}
+			#container > div {
+				padding: 20px;
+				float: left;
+			}
+		</style>	
+		<script src="../../../lib/jquery-1.8.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/widgets.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body> 
+		<div id="container">
+			<div>
+				<label for="widgets">Number of Widgets:</label>
+				<input type="text" name="widgets" value="" id="widgets">
+			</div>
+
+			<div>
+				<select name="colour" id="colour" size="1">
+					<option value="">Please select a colour</option>
+					<option value="option1">White</option>
+					<option value="option2">Orange</option>
+					<option value="option3">Blue</option>
+				</select>		
+			</div>
+
+			<div>
+				<input type="submit" value="OK" />
+			</div>
+		</div>
+	</body>
+</html>
+		
