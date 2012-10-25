@@ -34,8 +34,10 @@ dependencies {
             'org.springframework:spring-test:3.1.1.RELEASE',
             'org.mockito:mockito-all:1.9.0',
             'org.testng:testng:6.1.1',
-            'org.seleniumhq.selenium:selenium-java:2.23.0',
-            'org.seleniumhq.selenium:selenium-firefox-driver:2.23.0'
+            'org.seleniumhq.selenium:selenium-java:2.25.0',
+            'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0',
+            'org.seleniumhq.selenium:selenium-server:2.25.0'
+
 }
 
 jettyRun {
@@ -51,7 +53,7 @@ task functionalTest(type: Test, dependsOn: "test") {
 }
 
 functionalTest.doFirst {
-    jettyRun.httpPort = 9876
+    jettyRun.httpPort = 8080
     jettyRun.daemon = true
     jettyRun.execute()
 }
