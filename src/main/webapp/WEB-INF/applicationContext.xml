@@ -71,27 +71,29 @@
         <property name="templateLoaderPath" value="/WEB-INF/freemarker/"/>
     </bean>
 
-    <bean id=" viewResolver"
+    <bean id="viewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
     </bean>
-    <bean
-            name="authenticationFilter"
-            class="org.jasig.cas.client.authentication.AuthenticationFilter"
-            p:casServerLoginUrl="https://cas.thoughtworks.com:443"
-            p:renew="false"
-            p:gateway="false"
-            p:service="https://localhost:8080/twu"/>
+    <!--<bean-->
+            <!--name="authenticationFilter"-->
+            <!--class="org.jasig.cas.client.authentication.AuthenticationFilter"-->
+            <!--p:casServerLoginUrl="https://castest.thoughtworks.com:443/cas/login"-->
+            <!--p:renew="false"-->
+            <!--p:gateway="false"-->
+            <!--p:service="http://127.0.0.1:8080/twu/"/>-->
+
+
     <bean
             name="ticketValidationFilter"
             class="org.jasig.cas.client.validation.Cas10TicketValidationFilter"
-            p:service="https://localhost:8080/twu">
+            p:service="http://127.0.0.1:8080/twu/">
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
-                <constructor-arg index="0" value="https://cas.thoughtworks.com:443"/>
+                <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
             </bean>
         </property>
     </bean>
