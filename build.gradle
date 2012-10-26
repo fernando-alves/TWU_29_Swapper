@@ -8,7 +8,9 @@ repositories {
 }
 
 dependencies {
-    compile 'javax.servlet:servlet-api:2.5',
+    compile 'javax.inject:javax.inject-tck:1',
+            'javax.servlet:servlet-api:2.5',
+            'org.unitils:unitils:1.0-rc-4',
             'org.mybatis:mybatis:3.1.1',
             'org.mybatis:mybatis-spring:1.1.1',
             'org.springframework:spring-core:3.1.1.RELEASE',

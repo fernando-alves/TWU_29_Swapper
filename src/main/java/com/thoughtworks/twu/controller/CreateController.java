@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CreateController {
-
     private UserService userService;
 
     @Autowired
@@ -20,13 +19,7 @@ public class CreateController {
     }
 
     @RequestMapping(value = "?ticket", method = RequestMethod.GET)
-    public ModelAndView homepage(
-            @RequestParam(value = "username", defaultValue = "") String username) {
-        ModelAndView modelAndView = new ModelAndView("example/home");
-        if (!username.isEmpty()) {
-            User user = userService.getUser(username);
-            modelAndView.addObject("user", user).addObject("username", username);
-        }
-        return modelAndView;
+    public ModelAndView homepage() {
+        return new ModelAndView("html/home");
     }
 }

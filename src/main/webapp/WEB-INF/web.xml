@@ -12,14 +12,14 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/applicationContext.xml</param-value>
         </init-param>
-
-
     </servlet>
+
     <servlet>
         <servlet-name>static</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
@@ -29,30 +29,24 @@
         <servlet-name>static</servlet-name>
         <url-pattern>/static/*</url-pattern>
     </servlet-mapping>
+
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <filter>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>authenticationFilter</param-value>
+        </init-param>
+    </filter>
 
-
-
-
-
-
-    <!--<filter>-->
-        <!--<filter-name>CAS Authentication Filter</filter-name>-->
-        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
-        <!--<init-param>-->
-            <!--<param-name>targetBeanName</param-name>-->
-            <!--<param-value>authenticationFilter</param-value>-->
-        <!--</init-param>-->
-        <!--</filter>-->
-        <!--<filter-mapping>-->
-            <!--<filter-name>CAS Authentication Filter</filter-name>-->
-            <!--<url-pattern>/*</url-pattern>-->
-        <!--</filter-mapping>-->
-
-
+    <filter-mapping>
+        <filter-name>CAS Authentication Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>CAS Validation Filter</filter-name>
@@ -62,10 +56,9 @@
             <param-value>ticketValidationFilter</param-value>
         </init-param>
     </filter>
+
     <filter-mapping>
         <filter-name>CAS Validation Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-
 </web-app>

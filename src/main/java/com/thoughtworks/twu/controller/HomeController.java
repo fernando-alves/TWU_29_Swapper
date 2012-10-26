@@ -20,7 +20,7 @@ public class HomeController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView homepage(
-        @RequestParam(value = "username", defaultValue = "") String username) {
+            @RequestParam(value = "username", defaultValue = "") String username) {
         ModelAndView modelAndView = new ModelAndView("example/home");
         if (!username.isEmpty()) {
             User user = userService.getUser(username);
