@@ -2,6 +2,7 @@ package functional.com.thoughtworks.twu;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class HomeFunctionalTest {
         webDriver = new FirefoxDriver();
     }
 
+    @Ignore
     @Test
     public void shouldShowTryMeLink() {
         webDriver.get("http://localhost:8080/twu");
