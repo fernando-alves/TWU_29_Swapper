@@ -57,7 +57,7 @@ task functionalTest(type: Test, dependsOn: "test") {
 functionalTest.doFirst {
     jettyRun.httpPort = 8080
     jettyRun.daemon = true
-    jettyRun.execute()     gradle
+    jettyRun.execute()
 }
 
 [jettyRunWar, jettyStop]*.stopPort = 8081
