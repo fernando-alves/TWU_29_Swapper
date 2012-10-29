@@ -1,11 +1,24 @@
 package com.thoughtworks.twu.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-
+@Entity
+@Table(name = "User")
 public class User implements Serializable {
-    private int id;
+
+    @Id
+    @Column(name = "Id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String id;
+
+    @Column(name = "Name")
     private String name;
+
+    @Column(name = "Email")
     private String email;
 
     public User() {
@@ -23,7 +36,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public User(int id, String name) {
+    public User(String id, String name) {
         this.id = id;
         this.name = name;
     }

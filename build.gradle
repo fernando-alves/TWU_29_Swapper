@@ -11,8 +11,6 @@ dependencies {
     compile 'javax.inject:javax.inject-tck:1',
             'javax.servlet:servlet-api:2.5',
             'org.unitils:unitils:1.0-rc-4',
-            'org.mybatis:mybatis:3.1.1',
-            'org.mybatis:mybatis-spring:1.1.1',
             'org.springframework:spring-core:3.1.1.RELEASE',
             'org.springframework:spring-webmvc:3.1.1.RELEASE',
             'org.springframework:spring-web:3.1.1.RELEASE',
@@ -25,11 +23,12 @@ dependencies {
             'hsqldb:hsqldb:1.8.0.10',
             'org.jasig.cas:cas-client-core:3.1.9',
             'org.springframework.security:spring-security-core:3.1.2.RELEASE',
-            // hibernate
             'javassist:javassist:3.11.0.GA',
             'org.hibernate:hibernate-core:3.5.6-Final',
             'org.hibernate:hibernate-annotations:3.5.6-Final',
-            'org.hibernate:hibernate-validator:4.2.0.Final'
+            'org.hibernate:hibernate-validator:4.2.0.Final',
+            'org.springframework:spring-jdbc:3.1.2.RELEASE',
+            'mysql:mysql-connector-java:5.1.21'
 
 
     testCompile 'junit:junit:4.10',
@@ -38,7 +37,9 @@ dependencies {
             'org.testng:testng:6.1.1',
             'org.seleniumhq.selenium:selenium-java:2.25.0',
             'org.seleniumhq.selenium:selenium-firefox-driver:2.25.0',
-            'org.seleniumhq.selenium:selenium-server:2.25.0'
+            'org.seleniumhq.selenium:selenium-server:2.25.0',
+            'org.springframework:spring-tx:3.1.2.RELEASE',
+            'org.springframework:spring-beans:3.1.2.RELEASE'
 
 }
 
