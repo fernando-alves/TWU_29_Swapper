@@ -9,17 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@Transactional
 public class UserDaoTest {
 
     @Autowired
     private UserDao userDao;
 
     @Test
-    public void shouldGetUserName(){
+    public void shouldGetEmailFromNewUserRecord(){
         User user = new User();
         user.setName("rtessier");
         user.setEmail("rtessier@thoughtworks.com");
