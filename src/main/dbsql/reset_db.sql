@@ -1,4 +1,8 @@
-drop table user;
+drop database if exists swap;
+create database swap;
+use swap;
+
+drop table if exists user;
 drop table if exists changelog;
 
 CREATE TABLE changelog (
