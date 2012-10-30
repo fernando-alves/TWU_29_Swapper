@@ -1,13 +1,16 @@
 package functional.com.thoughtworks.twu;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,28 +21,23 @@ public class HomeFunctionalTest {
 
     @Before
     public void setUp() {
-        webDriver = new FirefoxDriver();
+       webDriver = new FirefoxDriver();
     }
 
-    @Ignore
     @Test
     public void shouldShowTryMeLink() {
-        webDriver.get("http://localhost:8080/twu");
-        WebElement link = webDriver.findElement(By.tagName("a"));
+        webDriver.get("http://google.com");
+        WebElement testElement =webDriver.findElement(By.name("q"));
+        testElement.sendKeys("Cheese");
+        testElement.submit();
 
-        assertThat(link.getText(), is("Try me"));
-        assertThat(link.getAttribute("href"), is("http://localhost:8080/twu/?username=bill"));
+        assertThat(webDriver.getTitle(),is("Google"));
 
-        webDriver.get(link.getAttribute("href"));
-        WebElement h1 = webDriver.findElement(By.tagName("h1"));
-
-        assertThat(h1.getText(), is("Hello bill"));
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws Exception{
         webDriver.close();
     }
-
 
 }
