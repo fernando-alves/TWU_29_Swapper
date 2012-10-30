@@ -1,14 +1,13 @@
 package com.thoughtworks.twu.persistence;
 
 
+import com.thoughtworks.twu.domain.User;
 import junit.framework.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.thoughtworks.twu.domain.User;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +18,7 @@ public class UserDaoTest {
     @Autowired
     private UserDao userDao;
 
-    @Test @Ignore
+    @Test
     public void shouldGetUserName(){
         User user = new User();
         user.setName("rtessier");

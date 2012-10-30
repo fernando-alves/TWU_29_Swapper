@@ -18,13 +18,6 @@
 
     <mvc:annotation-driven/>
 
-    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
-    <!--<property name="locations">-->
-    <!--<list>-->
-    <!--<value>WEB-INF/context/datasource.properties</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
 
     <!-- Data source and Hibernate configuration -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -34,18 +27,17 @@
         <property name="password" value="" />
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
-                <prop key="hibernate.generate_statistics">true</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="connection.useUnicode">true</prop>
-                <prop key="connection.characterEncoding">utf-8</prop>
-                <prop key="hibernate.autoReconnect">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">none</prop>
-            </props>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>
+        <property name="persistenceUnitName" value="NewPersistenceUnit"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="loadTimeWeaver">
+            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+        </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+            </bean>
         </property>
         <property name="packagesToScan">
             <list>
@@ -53,13 +45,6 @@
             </list>
         </property>
     </bean>
-
-    <!-- Transaction and AOP Configuration -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- Freemarker -->
     <bean id="freemarkerConfig"
