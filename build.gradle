@@ -110,7 +110,7 @@ task resetdb << {
             password: dbPassword,
             encoding: 'UTF-8',
             classpath: configurations.compile.asPath) {
-        fileset(file: 'src/main/dbsql/reset_db.sql')
+        fileset(file: 'src/main/dbsql/resetDatabase.sql')
     }
 }
 
