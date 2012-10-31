@@ -9,21 +9,6 @@ import com.thoughtworks.twu.domain.User;
 @Repository
 public class UserDao {
 
-//    @Autowired
-//    private EntityManagerFactory entityManagerFactory;
-//
-//    public void saveUser(User user) {
-//        EntityManager entityManager = entityManagerFactory.createEntityManager();
-//        entityManager.persist(user);
-//    }
-//
-//    public User getUserByName(String userName) {
-//        javax.persistence.Query query = entityManagerFactory.createEntityManager().createQuery("FROM User WHERE Name = '" + userName + "'");
-//
-//        User user = (User)query.getResultList().get(0);
-//        return user;
-//    }
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -33,7 +18,7 @@ public class UserDao {
 
     public User getUserByName(String userName) {
         Query query = sessionFactory.getCurrentSession().createQuery("from User where name='" + userName + "'");
-        User user = (User)query.list().get(0);
+        User user = (User) query.list().get(0);
         return user;
     }
 

@@ -30,15 +30,12 @@ public class OfferDaoTest {
        String offerCategory = "ANIMAL";
        String offerOwner = "Hermione";
 
-
-       Offer offer = new Offer("12345", offerTitle, offerDescription, offerCategory, offerOwner);
+       Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner);
        String generatedId = offerDao.saveOffer(offer);
 
        Offer offerFromDatabase = offerDao.getOfferById(generatedId);
 
        assertThat(offerFromDatabase, is(offer));
-
-
     }
 
     @Test
@@ -48,16 +45,12 @@ public class OfferDaoTest {
         String offerCategory = "HOUSE";
         String offerOwner = "Dumbledore";
 
-
-        Offer offer = new Offer("12345", offerTitle, offerDescription, offerCategory, offerOwner);
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner);
 
         String generatedId = offerDao.saveOffer(offer);
 
         Offer offerFromDatabase = offerDao.getOfferById(generatedId);
 
         assertThat(offerFromDatabase, is(offer));
-
-
     }
-
 }

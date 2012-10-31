@@ -5,6 +5,9 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpSession;
 
 @Repository
 public class OfferDao {
@@ -13,6 +16,7 @@ public class OfferDao {
     private SessionFactory sessionFactory;
 
     public String saveOffer(Offer offer) {
+//        sessionFactory.openSession().save(offer);
         sessionFactory.getCurrentSession().save(offer);
         return offer.getId();
     }

@@ -107,4 +107,15 @@ public class Offer implements Serializable {
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Offer{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", owner='" + owner + '\'' +
+                '}';
+    }
 }
