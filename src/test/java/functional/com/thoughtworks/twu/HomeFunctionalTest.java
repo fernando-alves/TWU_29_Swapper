@@ -32,7 +32,6 @@ public class HomeFunctionalTest {
         testElement.submit();
 
         assertThat(webDriver.getTitle(),is("Google"));
-
     }
 
     @After
