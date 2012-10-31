@@ -86,7 +86,7 @@
     <!-- CAS Authentication -->
     <bean name="authenticationFilter"
           class="org.jasig.cas.client.authentication.AuthenticationFilter"
-          p:casServerLoginUrl="https://cas.thoughtworks.com:443/cas/login"
+          p:casServerLoginUrl="https://castest.thoughtworks.com:443/cas/login"
           p:renew="false"
           p:gateway="false"
           p:service="http://127.0.0.1:8080/twu/"/>
@@ -96,7 +96,7 @@
           p:service="http://127.0.0.1:8080/twu/">
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
-                <constructor-arg index="0" value="https://cas.thoughtworks.com:443/cas"/>
+                <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
             </bean>
         </property>
     </bean>
