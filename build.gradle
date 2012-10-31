@@ -65,6 +65,11 @@ test{
     exclude '**/functional/com/thoughtworks/**/*.*'
 }
 
+test.doFirst {
+    resetdb.execute();
+    updatedb.execute();
+}
+
 task functionalTest(type: Test, dependsOn: "test") {
     include '**/functional/com/thoughtworks/**/*.*'
 }
@@ -90,6 +95,7 @@ project.ext {
 }
 
 task updatedb << {
+
     ant.taskdef(name: 'dbdeploy',
             classname: 'com.dbdeploy.AntTarget',
             classpath: configurations.compile.asPath)
@@ -104,6 +110,7 @@ task updatedb << {
 }
 
 task resetdb << {
+
     ant.sql(driver: dbDriver,
             url: 'jdbc:mysql://localhost:3306/',
             userid: dbUsername,
@@ -124,3 +131,4 @@ task undolastchange << {
         fileset(file: 'db/undo_last_change.sql')
     }
 }
+
