@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS swap;
 CREATE DATABASE swap;
 Use swap;
 
-CREATE TABLE changeLog (
+CREATE TABLE changelog (
   change_number BIGINT NOT NULL,
   complete_dt TIMESTAMP NOT NULL,
   applied_by VARCHAR(100) NOT NULL,
@@ -10,4 +10,4 @@ CREATE TABLE changeLog (
 );
 
 
-ALTER TABLE changeLog ADD CONSTRAINT pkChangeLog PRIMARY KEY (change_number);
+ALTER TABLE changelog ADD CONSTRAINT pkChangeLog PRIMARY KEY (change_number);

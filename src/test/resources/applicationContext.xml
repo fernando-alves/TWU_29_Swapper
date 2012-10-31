@@ -55,6 +55,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.thoughtworks.twu.domain.User</value>
+                <value>com.thoughtworks.twu.domain.Offer</value>
             </list>
         </property>
         <property name="hibernateProperties">
