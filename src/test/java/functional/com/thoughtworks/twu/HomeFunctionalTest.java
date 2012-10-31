@@ -26,6 +26,12 @@ public class HomeFunctionalTest {
 
     @Test
     public void shouldShowTryMeLink() {
+//        webDriver.get("http://127.0.0.1:8080/twu");
+//        WebElement userName = webDriver.findElement(By.id("username"));
+//        userName.sendKeys("test.twu");
+//        WebElement password = webDriver.findElement(By.id("password"));
+//        password.sendKeys("Th0ughtW0rks@12");
+//        WebElement submit = webDriver.findElement(By.name("submit"));
         webDriver.get("http://google.com");
         WebElement testElement =webDriver.findElement(By.name("q"));
         testElement.sendKeys("Cheese");
