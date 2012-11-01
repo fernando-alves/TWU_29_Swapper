@@ -20,6 +20,7 @@ public class LoginFunctionalTest {
     public void setUp() {
         webDriver = new FirefoxDriver();
     }
+
     @Test
     public void shouldShowErrorWhenEmptyFields() {
         webDriver.get("https://cas.thoughtworks.com/cas/login");
@@ -44,8 +45,9 @@ public class LoginFunctionalTest {
         String expectedErrorMsg = "The credentials you provided cannot be determined to be authentic.";
         assertThat(errorMsgElement.getText(), is(expectedErrorMsg));
     }
+
     @Test
-    public void shouldLoginSuccessfully(){
+    public void shouldLoginSuccessfully() {
         webDriver.get("http://127.0.0.1:8080/twu/");
         String username = "test.twu";
         String password = "Th0ughtW0rks@12";
@@ -59,7 +61,8 @@ public class LoginFunctionalTest {
         assertThat(expectedUrl.contains("http://127.0.0.1:8080/twu"), is(true));
 
     }
-    public  void shouldBeAbleToPerformSSO() {
+
+    public void shouldBeAbleToPerformSSO() {
         webDriver.get("http://castest.thoughtworks.com");
         String username = "test.twu";
         String password = "Th0ughtW0rks@12";

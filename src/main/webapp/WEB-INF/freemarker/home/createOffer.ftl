@@ -9,7 +9,7 @@
 <div id="content">
 
     <fieldset>
-        <legend>Add Offer</legend>
+        <legend> ${username} / Add Offer</legend>
         <form name="user" action="home.ftl" method="post">
             Title: <br/>
             <input type="text" name="title" /> <br/>
@@ -23,7 +23,7 @@
             </select><br/>
             Description:<br/>
             <textarea rows="4" cols="50" name="description"></textarea><br/>
-            <input type="submit" value="   Save   "/>
+            <input type="submit" value="   Save   " name="submit"/>
         </form>
     </fieldset>
 

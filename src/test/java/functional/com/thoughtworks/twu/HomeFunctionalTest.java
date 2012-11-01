@@ -1,19 +1,13 @@
 package functional.com.thoughtworks.twu;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomeFunctionalTest {
 
@@ -21,27 +15,37 @@ public class HomeFunctionalTest {
 
     @Before
     public void setUp() {
-       webDriver = new FirefoxDriver();
+        webDriver = new FirefoxDriver();
     }
 
     @Test
-    public void shouldShowTryMeLink() {
-//        webDriver.get("http://127.0.0.1:8080/twu");
-//        WebElement userName = webDriver.findElement(By.id("username"));
-//        userName.sendKeys("test.twu");
-//        WebElement password = webDriver.findElement(By.id("password"));
-//        password.sendKeys("Th0ughtW0rks@12");
-//        WebElement submit = webDriver.findElement(By.name("submit"));
-        webDriver.get("http://google.com");
-        WebElement testElement =webDriver.findElement(By.name("q"));
-        testElement.sendKeys("Cheese");
-        testElement.submit();
+    public void showGoToCreateOfferPage() throws InterruptedException {
+        logIn();
 
-        assertThat(webDriver.getTitle(),is("Google"));
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+        webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
     }
 
-    @After
-    public void tearDown() throws Exception{
+    private void logIn() {
+        webDriver.get("http://127.0.0.1:8080/twu/");
+        String username = "qsli";
+        String password = "68200509";
+
+        webDriver.findElement(By.id("username")).sendKeys(username);
+        webDriver.findElement(By.id("password")).sendKeys(password);
+        webDriver.findElement(By.name("submit")).click();
+    }
+
+    //    @After
+    public void tearDown() throws Exception {
         webDriver.close();
     }
 
