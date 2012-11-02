@@ -10,7 +10,7 @@
 
     <fieldset>
         <legend> ${username} / Add Offer</legend>
-        <form name="user" action="home.ftl" method="post">
+        <form name="user" action="create" method="post">
             Title: <br/>
             <input type="text" name="title" /> <br/>
             Catagory: <br/>
@@ -22,7 +22,7 @@
                 <option value="Services">Services</option>
             </select><br/>
             Description:<br/>
-            <textarea rows="4" cols="50" name="description"></textarea><br/>
+            <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;"></textarea><br/>
             <input type="submit" value="   Save   " name="submit"/>
         </form>
     </fieldset>

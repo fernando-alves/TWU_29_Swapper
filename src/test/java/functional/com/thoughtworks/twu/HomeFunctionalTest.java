@@ -42,8 +42,6 @@ public class HomeFunctionalTest {
         assertThat(expectedUrl, is(webDriver.getCurrentUrl()));
     }
 
-
-
     private void logIn() {
         webDriver.get("http://127.0.0.1:8080/twu/");
         String username = "test.twu";
