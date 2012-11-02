@@ -13,7 +13,7 @@
         <form name="user" action="create" method="post">
             Title: <br/>
             <input type="text" name="title" /> <br/>
-            Catagory: <br/>
+            Category: <br/>
             <select name="category" id="selectCategory">
                 <option value="Books">Books</option>
                 <option value="Cars">Cars</option>

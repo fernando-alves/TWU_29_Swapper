@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<h1>User ${username}</h1>
+<h1 id="username">User ${username}</h1>
 
 <a href="/twu/offer/create" id="createOffer">create offer</a>
 </body>
