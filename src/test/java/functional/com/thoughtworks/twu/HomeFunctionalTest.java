@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -36,17 +37,16 @@ public class HomeFunctionalTest {
 
     private void logIn() {
         webDriver.get("http://127.0.0.1:8080/twu/");
-        String username = "qsli";
-        String password = "68200509";
+        String username = "test.twu";
+        String password = "Th0ughtW0rks@12";
 
         webDriver.findElement(By.id("username")).sendKeys(username);
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
     }
 
-    //    @After
+    @After
     public void tearDown() throws Exception {
         webDriver.close();
     }
-
 }
