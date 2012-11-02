@@ -104,9 +104,4 @@
         <property name="redirectAfterValidation" value="true"/>
     </bean>
 
-    <!--<bean id="casValidationFilter" class="org.jasig.cas.client.web.filter.TicketValidationFilter">-->
-        <!--<constructor-arg index="0" value="${cas.client.serverName}"/>-->
-        <!--<constructor-arg index="1"><null/></constructor-arg>-->
-        <!--<constructor-arg index="2" ref="ticketValidator"/>-->
-    <!--</bean>-->
 </beans>

@@ -28,7 +28,7 @@ public class CreateOfferController {
         return "home/createOffer";
     }
 
-    @RequestMapping(value = "/home.ftl", method = RequestMethod.POST)
+    @RequestMapping(value = "/home", method = RequestMethod.POST)
     public ModelAndView createOffer(@RequestParam("title") String title, @RequestParam("category") String category,
                                     @RequestParam("description") String description, @ModelAttribute("username") final String username
                                     ) {
