@@ -5,9 +5,8 @@ import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Repository
 public class OfferDao {
@@ -25,5 +24,10 @@ public class OfferDao {
         Query query = sessionFactory.getCurrentSession().createQuery("from Offer where id=?").setParameter(0, offerId);
         Offer offer = (Offer) query.list().get(0);
         return offer;
+    }
+
+    public List<Offer> getAll() {
+        Query query = sessionFactory.getCurrentSession().createQuery("from Offer");
+        return (List<Offer>) query.list();
     }
 }

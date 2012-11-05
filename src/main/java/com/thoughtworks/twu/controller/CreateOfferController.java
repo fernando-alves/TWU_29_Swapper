@@ -11,19 +11,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes({"username"})
 @Transactional
+@RequestMapping(value = "/offer")
 public class CreateOfferController {
 
     @Autowired
     private OfferServiceInterface offerService;
 
     public CreateOfferController() {
+
     }
 
     public CreateOfferController(OfferServiceInterface offerService) {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "/createOffer.ftl", method = RequestMethod.GET)
+    @RequestMapping(value = "/createOffer", method = RequestMethod.GET)
     public String goToHomepageAfterCreatingOffer() {
         return "home/createOffer";
     }
@@ -37,6 +39,13 @@ public class CreateOfferController {
         ModelAndView modelAndView = new ModelAndView("home/home");
         modelAndView.addObject("offerId", offerId);
 
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/browse", method = RequestMethod.GET)
+    public ModelAndView browse() {
+        ModelAndView modelAndView = new ModelAndView("offer/browse");
+        modelAndView.addObject("allOffers", offerService.getAll());
         return modelAndView;
     }
 }

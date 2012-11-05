@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Offer;
+import com.thoughtworks.twu.service.OfferService;
 import com.thoughtworks.twu.service.OfferServiceInterface;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +12,14 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
@@ -48,6 +55,30 @@ public class CreateOfferControllerTest {
         Offer offerFromDatabase = offerServiceInterface.getOfferById(modelOfferId);
 
         assertThat(offerFromDatabase, is(offer));
+    }
 
+    @Test
+    public void shouldExposeAllOffersToBrowseView() throws Exception {
+
+        OfferService offerService = mock(OfferService.class);
+        CreateOfferController createOfferController = new CreateOfferController(offerService);
+
+        List<Offer> expectedOffers = new ArrayList<Offer>();
+
+        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me");
+        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You");
+        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else");
+
+        expectedOffers.add(firstOffer);
+        expectedOffers.add(secondOffer);
+        expectedOffers.add(thirdOffer);
+
+        when(offerService.getAll()).thenReturn(expectedOffers);
+        ModelAndView modelAndView = createOfferController.browse();
+        Map<String, Object> model = modelAndView.getModel();
+
+        List<Offer> actualOffers = (List<Offer>) model.get("allOffers");
+
+        assertThat(expectedOffers, is(actualOffers));
     }
 }

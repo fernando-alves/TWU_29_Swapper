@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class OfferService implements OfferServiceInterface {
@@ -21,5 +23,10 @@ public class OfferService implements OfferServiceInterface {
     @Override
     public String saveOffer(Offer offer) {
         return offerDao.saveOffer(offer);
+    }
+
+    @Override
+    public List<Offer> getAll() {
+        return offerDao.getAll();
     }
 }
