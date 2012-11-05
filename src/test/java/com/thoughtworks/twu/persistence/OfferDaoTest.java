@@ -81,6 +81,8 @@ public class OfferDaoTest {
         List<Offer> expectedOffers = new ArrayList<Offer>();
         expectedOffers.add(offer);
         expectedOffers.add(secondOffer);
-        assertEquals(expectedOffers,allOffers);
+        assertThat(expectedOffers.containsAll(allOffers), is(true));
+        assertThat(allOffers.containsAll(expectedOffers), is(true));
+
     }
 }
