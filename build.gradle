@@ -89,10 +89,12 @@ functionalTest.doLast {
 
 project.ext {
     dbDriver = 'com.mysql.jdbc.Driver'
-    dbUrl = 'jdbc:mysql://localhost:3306/swap?characterEncoding=utf-8'
+    dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
+    dbUrl = 'jdbc:mysql://' + dbHostName + ':3306/swap?characterEncoding=utf-8'
     dbUsername = 'root'
-    dbPassword = ''
+    dbPassword = rootProject.hasProperty('dbPassword') ? dbPassword : ''
 }
+
 
 task updatedb << {
 
