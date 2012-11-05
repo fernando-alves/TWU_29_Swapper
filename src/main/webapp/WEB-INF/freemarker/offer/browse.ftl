@@ -8,7 +8,7 @@
 
 <div id="content">
     <ol>
-    <#list allOffers as offer>
+    <#list model["allOffers"] as offer>
         <li>${offer.getTitle()}</li>
     </#list>
     </ol>

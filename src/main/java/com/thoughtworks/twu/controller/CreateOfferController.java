@@ -11,21 +11,20 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @SessionAttributes({"username"})
 @Transactional
-@RequestMapping(value = "/offer")
+@RequestMapping("/offer")
 public class CreateOfferController {
 
     @Autowired
     private OfferServiceInterface offerService;
 
     public CreateOfferController() {
-
     }
 
     public CreateOfferController(OfferServiceInterface offerService) {
         this.offerService = offerService;
     }
 
-    @RequestMapping(value = "/createOffer", method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String goToHomepageAfterCreatingOffer() {
         return "home/createOffer";
     }

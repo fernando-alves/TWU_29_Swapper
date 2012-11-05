@@ -38,7 +38,6 @@ public class CreateOfferControllerTest {
 
         assertThat(nextView, is(expectedView));
     }
-
     @Test
     public void shouldSaveOfferCorrectly() {
         CreateOfferController createOfferController = new CreateOfferController(offerServiceInterface);
@@ -55,6 +54,7 @@ public class CreateOfferControllerTest {
         Offer offerFromDatabase = offerServiceInterface.getOfferById(modelOfferId);
 
         assertThat(offerFromDatabase, is(offer));
+
     }
 
     @Test
@@ -80,5 +80,9 @@ public class CreateOfferControllerTest {
         List<Offer> actualOffers = (List<Offer>) model.get("allOffers");
 
         assertThat(expectedOffers, is(actualOffers));
+    }
+
+    public OfferServiceInterface mockOfferService(){
+        return mock(OfferService.class);
     }
 }
