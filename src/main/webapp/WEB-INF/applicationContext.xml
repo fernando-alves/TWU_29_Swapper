@@ -21,34 +21,12 @@
 
     <!-- Data source and Hibernate configuration -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/swap?characterEncoding=utf-8"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/swap?characterEncoding=utf-8" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
     </bean>
 
-    <!--<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->
-    <!--<property name="persistenceXmlLocation" value="classpath*:META-INF/persistence.xml"></property>-->
-    <!--<property name="persistenceUnitName" value="NewPersistenceUnit"/>-->
-    <!--<property name="dataSource" ref="dataSource"/>-->
-    <!--<property name="loadTimeWeaver">-->
-    <!--<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>-->
-    <!--</property>-->
-    <!--<property name="jpaVendorAdapter">-->
-    <!--<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">-->
-    <!--<property name="showSql" value="true"/>-->
-    <!--</bean>-->
-    <!--</property>-->
-    <!--<property name="packagesToScan">-->
-    <!--<list>-->
-    <!--<value>com.thoughtworks.twu</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-
-    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-    <!--<property name="entityManagerFactory" ref="entityManagerFactory"></property>-->
-    <!--</bean>-->
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
@@ -85,23 +63,29 @@
         <property name="exposeSpringMacroHelpers" value="true"/>
     </bean>
 
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>/WEB-INF/${PROJECT_ENV}.properties</value>
+            </list>
+        </property>
+    </bean>
+
     <!-- CAS Authentication -->
     <bean name="authenticationFilter"
           class="org.jasig.cas.client.authentication.AuthenticationFilter"
           p:casServerLoginUrl="https://castest.thoughtworks.com:443/cas/login"
           p:renew="false"
           p:gateway="false"
-          p:service="http://127.0.0.1:8080/twu/"/>
+          p:service="${casServiceUrl}"/>
 
     <bean name="ticketValidationFilter"
           class="org.jasig.cas.client.validation.Cas10TicketValidationFilter"
-          p:service="http://127.0.0.1:8080/twu/">
+          p:service="${casServiceUrl}">
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
                 <constructor-arg index="0" value="https://castest.thoughtworks.com:443/cas"/>
             </bean>
         </property>
-        <property name="redirectAfterValidation" value="true"/>
     </bean>
-
 </beans>
