@@ -17,7 +17,7 @@ public class UserDao {
     }
 
     public User getUserByName(String userName) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from User where name='" + userName + "'");
+        Query query = sessionFactory.getCurrentSession().createQuery("from User where name=?").setParameter(0,userName);
         User user = (User) query.list().get(0);
         return user;
     }
