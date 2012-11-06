@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<h1>User ${username}</h1>
+<h2>Welcome, ${username}</h2>
 <div id="content">
     <ol>
     <#list allOffers as offer>

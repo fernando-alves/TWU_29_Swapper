@@ -103,9 +103,9 @@ public class CreateOfferControllerTest {
         Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You");
         Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else");
 
-        expectedOffers.add(firstOffer);
-        expectedOffers.add(secondOffer);
         expectedOffers.add(thirdOffer);
+        expectedOffers.add(secondOffer);
+        expectedOffers.add(firstOffer);
 
         when(offerService.getAll()).thenReturn(expectedOffers);
         ModelAndView modelAndView = createOfferController.browse(request,session);

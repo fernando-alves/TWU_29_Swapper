@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +28,12 @@ public class OfferService implements OfferServiceInterface {
 
     @Override
     public List<Offer> getAll() {
-        return offerDao.getAll();
+        List<Offer> tempOrderedList = offerDao.getAll();
+        List<Offer> reverseList = new ArrayList<>();
+        for (int index = tempOrderedList.size()-1; index >= 0; index--) {
+              reverseList.add(tempOrderedList.get(index));
+        }
+
+        return reverseList;
     }
 }
