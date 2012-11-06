@@ -87,8 +87,6 @@ public class CreateOfferFunctionalTest {
     public void shouldDisplayUsername() {
         logIn();
 
-        WebElement clickButton = webDriver.findElement(By.id("username"));
-        clickButton.click();
         WebElement userNameOnCreatePage = webDriver.findElement(By.id("username"));
 
         assertThat(userNameOnCreatePage.getText().contains(username), is(true));

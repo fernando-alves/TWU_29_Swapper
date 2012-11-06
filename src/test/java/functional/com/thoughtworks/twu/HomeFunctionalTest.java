@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -26,16 +25,10 @@ public class HomeFunctionalTest {
 
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
-        webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
 
-        Select select = new Select(webDriver.findElement(By.tagName("select")));
-        select.selectByValue("Cars");
+        String expectedUrl = "http://127.0.0.1:8080/twu/offer/create";
+        assertThat(webDriver.getCurrentUrl(), is(expectedUrl));
 
-        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
-        webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
-        String expectedUrl = "http://127.0.0.1:8080/twu/home.ftl";
-        assertThat(expectedUrl, is(webDriver.getCurrentUrl()));
     }
 
 
