@@ -23,9 +23,7 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
@@ -42,6 +40,9 @@ public class CreateOfferControllerTest {
     private String category;
     private String description;
     private String owner;
+    private MockHttpServletRequest request;
+    private HttpSession session;
+    private HomeController homeController;
 
     @Before
     public void setUp() {
@@ -51,6 +52,9 @@ public class CreateOfferControllerTest {
         category = "Cars";
         description = "there is some descriptions";
         owner = "Qiushi";
+        homeController = new HomeController();
+        request = new MockHttpServletRequest();
+        session = request.getSession();
     }
 
     @Test
@@ -104,21 +108,27 @@ public class CreateOfferControllerTest {
         expectedOffers.add(thirdOffer);
 
         when(offerService.getAll()).thenReturn(expectedOffers);
-        ModelAndView modelAndView = createOfferController.browse();
+        ModelAndView modelAndView = createOfferController.browse(request,session);
         Map<String, Object> model = modelAndView.getModel();
 
         List<Offer> actualOffers = (List<Offer>) model.get("allOffers");
 
         assertThat(expectedOffers, is(actualOffers));
     }
+    @Test
+    public void shouldSetUsernameCorrectly() {
+        request.setRemoteUser("Fernando");
+        homeController.goToHomepage(request, session);
+        assertThat(session.getAttribute("username").toString(), is("Fernando"));
+    }
 
     private void createAnOffer() {
-        HttpSession session = mock(HttpSession.class);
-        when(session.getAttribute("username")).thenReturn("Qiushi");
-        MockHttpServletRequest request = new MockHttpServletRequest();
-        request.setSession(session);
+        HttpSession session1 = mock(HttpSession.class);
+        when(session1.getAttribute("username")).thenReturn("Qiushi");
+        MockHttpServletRequest request1 = new MockHttpServletRequest();
+        request1.setSession(session1);
 
-        createOfferController.createOffer(title, category, description, request);
+        createOfferController.createOffer(title, category, description, request1);
     }
 
 }

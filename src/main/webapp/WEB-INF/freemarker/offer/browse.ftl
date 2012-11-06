@@ -5,10 +5,10 @@
 </head>
 
 <body>
-
+<h1>User ${username}</h1>
 <div id="content">
     <ol>
-    <#list model["allOffers"] as offer>
+    <#list allOffers as offer>
         <li>${offer.getTitle()}</li>
     </#list>
     </ol>

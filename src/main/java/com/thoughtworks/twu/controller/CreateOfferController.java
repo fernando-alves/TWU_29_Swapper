@@ -12,6 +12,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes({"username"})
@@ -61,7 +62,8 @@ public class CreateOfferController {
     }
 
     @RequestMapping(value = "/browse", method = RequestMethod.GET)
-    public ModelAndView browse() {
+    public ModelAndView browse(HttpServletRequest request, HttpSession session) {
+        session.setAttribute("username", request.getRemoteUser());
         ModelAndView modelAndView = new ModelAndView("offer/browse");
         modelAndView.addObject("allOffers", offerService.getAll());
         return modelAndView;

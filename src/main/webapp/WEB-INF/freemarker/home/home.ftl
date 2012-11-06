@@ -5,8 +5,10 @@
 </head>
 
 <body>
-<h1 id="username">User ${username}</h1>
+<h1>User ${username}</h1>
 
-<a href="/twu/offer/create" id="createOffer">create offer</a>
+<a href="offer/create" id="createOffer">create offer</a>
+<br>
+<a href="offer/browse" id="browse">browse offer</a>
 </body>
 </html>
