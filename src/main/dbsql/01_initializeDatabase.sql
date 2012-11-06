@@ -8,8 +8,8 @@ CREATE TABLE User (
 
 CREATE TABLE Offer (
     Id varchar(80) not null,
-    Title varchar(80) not null,
-    Description varchar(80) null,
+    Title varchar(100) not null,
+    Description text not null,
     Category varchar(80) not null,
     Owner varchar(80),
     CONSTRAINT pk_offer PRIMARY KEY (Id)
