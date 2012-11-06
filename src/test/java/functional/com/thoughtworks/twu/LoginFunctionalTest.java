@@ -62,6 +62,7 @@ public class LoginFunctionalTest {
 
     }
 
+    @Test
     public void shouldBeAbleToPerformSSO() {
         webDriver.get("http://castest.thoughtworks.com");
         String username = "test.twu";
