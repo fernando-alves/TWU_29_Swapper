@@ -3,22 +3,28 @@ package com.thoughtworks.twu.controller;
 import com.thoughtworks.twu.domain.Offer;
 import com.thoughtworks.twu.service.OfferService;
 import com.thoughtworks.twu.service.OfferServiceInterface;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,31 +36,55 @@ public class CreateOfferControllerTest {
     @Autowired
     OfferServiceInterface offerServiceInterface;
 
+    private OfferServiceInterface mockOfferService;
+    private CreateOfferController createOfferController;
+    private String title;
+    private String category;
+    private String description;
+    private String owner;
+
+    @Before
+    public void setUp() {
+        mockOfferService = mock(OfferService.class);
+        createOfferController = new CreateOfferController(mockOfferService);
+        title = "this is a title";
+        category = "Cars";
+        description = "there is some descriptions";
+        owner = "Qiushi";
+    }
+
     @Test
     public void shouldGoToCreateOffer() {
-        CreateOfferController createOfferController = new CreateOfferController(offerServiceInterface);
-        String nextView = createOfferController.goToHomepageAfterCreatingOffer();
-        String expectedView = "home/createOffer";
+        String actualUrl = createOfferController.goToCreatingOfferPage();
+        String expectedUrl = "home/createOffer";
 
-        assertThat(nextView, is(expectedView));
+        assertThat(expectedUrl, is(actualUrl));
     }
+
     @Test
     public void shouldSaveOfferCorrectly() {
-        CreateOfferController createOfferController = new CreateOfferController(offerServiceInterface);
-        String title = "this is a title";
-        String category = "Cars";
-        String description = "there is some descriptions";
-        String owner = "Qiushi";
+        createAnOffer();
+        Offer offer = new Offer(title, description, category, owner);
 
-        ModelAndView modelAndView = createOfferController.createOffer(title, category, description, owner);
-        String modelOfferId = (String) modelAndView.getModel().get("offerId");
+        verify(mockOfferService).saveOffer(offer);
+    }
 
-        Offer offer = new Offer(modelOfferId, title, description, category, owner);
+    @Test
+    public void shouldReturnTheCorrectUrlToDisplayOffer() {
+        createAnOffer();
+        String actualUrl = createOfferController.viewAnOffer(new ModelMap());
+        String expectedUrl = "home/viewAnOffer";
 
-        Offer offerFromDatabase = offerServiceInterface.getOfferById(modelOfferId);
+        assertThat(expectedUrl, is(actualUrl));
+    }
 
-        assertThat(offerFromDatabase, is(offer));
+    @Test
+    public void shouldReturnTheCorrectAttributeFromModelMap(){
+        createAnOffer();
+        ModelMap modelMap = new ModelMap();
+        createOfferController.viewAnOffer(modelMap);
 
+        assertTrue(modelMap.containsAttribute("theOffer"));
     }
 
     @Test
@@ -82,7 +112,13 @@ public class CreateOfferControllerTest {
         assertThat(expectedOffers, is(actualOffers));
     }
 
-    public OfferServiceInterface mockOfferService(){
-        return mock(OfferService.class);
+    private void createAnOffer() {
+        HttpSession session = mock(HttpSession.class);
+        when(session.getAttribute("username")).thenReturn("Qiushi");
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setSession(session);
+
+        createOfferController.createOffer(title, category, description, request);
     }
+
 }

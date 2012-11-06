@@ -15,7 +15,6 @@ public class OfferDao {
     private SessionFactory sessionFactory;
 
     public String saveOffer(Offer offer) {
-//        sessionFactory.openSession().save(offer);
         sessionFactory.getCurrentSession().save(offer);
         return offer.getId();
     }
