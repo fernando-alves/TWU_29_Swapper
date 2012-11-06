@@ -114,7 +114,7 @@ task updatedb << {
 task resetdb << {
 
     ant.sql(driver: dbDriver,
-            url: 'jdbc:mysql://localhost:3306/',
+            url: 'jdbc:mysql://'+dbHostName+':3306/',
             userid: dbUsername,
             password: dbPassword,
             encoding: 'UTF-8',
