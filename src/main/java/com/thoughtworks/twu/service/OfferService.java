@@ -29,7 +29,7 @@ public class OfferService implements OfferServiceInterface {
     @Override
     public List<Offer> getAll() {
         List<Offer> tempOrderedList = offerDao.getAll();
-        List<Offer> reverseList = new ArrayList<>();
+        List<Offer> reverseList = new ArrayList<Offer>();
         for (int index = tempOrderedList.size()-1; index >= 0; index--) {
               reverseList.add(tempOrderedList.get(index));
         }
