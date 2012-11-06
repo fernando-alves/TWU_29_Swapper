@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.Select;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class CreateOfferFunctionalTest {
 
@@ -53,8 +54,20 @@ public class CreateOfferFunctionalTest {
         webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(1000);
-        String expectedUrl = "http://127.0.0.1:8080/twu/offer/viewAnOffer?username=test.twu";
+        String expectedUrl = "http://127.0.0.1:8080/twu/offer/viewAnOfferAfterCreating?username=test.twu";
         assertThat(expectedUrl, is(webDriver.getCurrentUrl()));
+    }
+
+    @Test
+    public void showGoToViewAnOfferPageFromBrowse() throws InterruptedException {
+        logIn();
+
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("browse")).click();
+
+        webDriver.findElement(By.id("offer1")).click();
+        Thread.sleep(1000);
+        assertTrue(webDriver.getCurrentUrl().contains("http://127.0.0.1:8080/twu/offer/viewAnOfferFromBrowse?offerId="));
     }
 
     @Test

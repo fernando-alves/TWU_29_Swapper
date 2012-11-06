@@ -24,10 +24,10 @@ public class CreateOfferController {
     private String description;
     private String username;
 
-    private String id;
-
     @Autowired
     private OfferServiceInterface offerService;
+
+    private String id;
 
     public CreateOfferController() {
     }
@@ -50,13 +50,22 @@ public class CreateOfferController {
         this.username = request.getSession().getAttribute("username").toString();
 
         id = createOffer(this.title, this.category, this.description, username);
+        setId(id);
 
-        return new RedirectView("viewAnOffer");
+        return new RedirectView("viewAnOfferAfterCreating");
     }
 
-    @RequestMapping("viewAnOffer")
-    public String viewAnOffer(ModelMap modelMap) {
-        Offer offer = offerService.getOfferById(id);
+    @RequestMapping("viewAnOfferAfterCreating")
+    public String viewAnOfferAfterCreating(ModelMap modelMap) {
+        Offer offer = offerService.getOfferById(getId());
+        modelMap.addAttribute("theOffer", offer);
+        return "home/viewAnOffer";
+    }
+
+    @RequestMapping("viewAnOfferFromBrowse")
+    public String viewAnOfferFromBrowse(ModelMap modelMap, @RequestParam("offerId") String offerId) {
+        setId(offerId);
+        Offer offer = offerService.getOfferById(getId());
         modelMap.addAttribute("theOffer", offer);
         return "home/viewAnOffer";
     }
@@ -72,5 +81,13 @@ public class CreateOfferController {
     private String createOffer(String title, String category, String description, String username) {
         Offer offer = new Offer(title, description, category, username);
         return offerService.saveOffer(offer);
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }

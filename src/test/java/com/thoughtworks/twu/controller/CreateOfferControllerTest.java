@@ -74,19 +74,37 @@ public class CreateOfferControllerTest {
     }
 
     @Test
-    public void shouldReturnTheCorrectUrlToDisplayOffer() {
+    public void shouldReturnTheCorrectUrlToDisplayOfferPageAfterCreatingOffer() {
         createAnOffer();
-        String actualUrl = createOfferController.viewAnOffer(new ModelMap());
+        String actualUrl = createOfferController.viewAnOfferAfterCreating(new ModelMap());
         String expectedUrl = "home/viewAnOffer";
 
         assertThat(expectedUrl, is(actualUrl));
     }
 
     @Test
-    public void shouldReturnTheCorrectAttributeFromModelMap(){
+    public void shouldReturnTheCorrectUrlToDisplayOfferFromBrowse() {
+        createAnOffer();
+        String actualUrl = createOfferController.viewAnOfferFromBrowse(new ModelMap(), "");
+        String expectedUrl = "home/viewAnOffer";
+
+        assertThat(expectedUrl, is(actualUrl));
+    }
+
+    @Test
+    public void shouldReturnTheCorrectAttributeFromModelMapAfterCreatingOffer() {
         createAnOffer();
         ModelMap modelMap = new ModelMap();
-        createOfferController.viewAnOffer(modelMap);
+        createOfferController.viewAnOfferAfterCreating(modelMap);
+
+        assertTrue(modelMap.containsAttribute("theOffer"));
+    }
+
+    @Test
+    public void shouldReturnTheCorrectAttributeFromModelMapFromBrowse() {
+        createAnOffer();
+        ModelMap modelMap = new ModelMap();
+        createOfferController.viewAnOfferAfterCreating(modelMap);
 
         assertTrue(modelMap.containsAttribute("theOffer"));
     }
@@ -97,7 +115,7 @@ public class CreateOfferControllerTest {
         OfferService offerService = mock(OfferService.class);
         CreateOfferController createOfferController = new CreateOfferController(offerService);
 
-        List<Offer> expectedOffers = new ArrayList<Offer>();
+        List<Offer> expectedOffers = new ArrayList<>();
 
         Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me");
         Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You");
@@ -108,13 +126,14 @@ public class CreateOfferControllerTest {
         expectedOffers.add(firstOffer);
 
         when(offerService.getAll()).thenReturn(expectedOffers);
-        ModelAndView modelAndView = createOfferController.browse(request,session);
+        ModelAndView modelAndView = createOfferController.browse(request, session);
         Map<String, Object> model = modelAndView.getModel();
 
         List<Offer> actualOffers = (List<Offer>) model.get("allOffers");
 
         assertThat(expectedOffers, is(actualOffers));
     }
+
     @Test
     public void shouldSetUsernameCorrectly() {
         request.setRemoteUser("Fernando");
