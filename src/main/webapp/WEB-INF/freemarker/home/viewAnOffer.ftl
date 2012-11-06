@@ -8,7 +8,7 @@
     Title : ${theOffer.title} <br/>
     Category : ${theOffer.category} <br/>
     Description : ${theOffer.description} <br/>
-    Contact email : ${theOffer.owner}@thoughtwokrs.com</br>
+    Contact email : ${theOffer.owner}@thoughtworks.com</br>
 </table>
 </body>
 </html>
