@@ -115,7 +115,7 @@ public class CreateOfferControllerTest {
         OfferService offerService = mock(OfferService.class);
         CreateOfferController createOfferController = new CreateOfferController(offerService);
 
-        List<Offer> expectedOffers = new ArrayList<>();
+        List<Offer> expectedOffers = new ArrayList<Offer>();
 
         Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me");
         Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You");

@@ -12,7 +12,7 @@
         <legend> ${username} / Add Offer</legend>
         <form name="user" action="/twu/offer/createAnOffer" method="post">
             Title: <br/>
-            <input type="text" name="title" /> <br/>
+            <input type="text" name="title" maxlength="100"/> <br/>
             Category: <br/>
             <select name="category" id="selectCategory">
                 <option value="Books">Books</option>
@@ -22,7 +22,7 @@
                 <option value="Services">Services</option>
             </select><br/>
             Description:<br/>
-            <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;"></textarea><br/>
+            <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br/>
             <input type="submit" value="   Save   " name="submit"/>
         </form>
     </fieldset>
