@@ -72,16 +72,14 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
-    <!--<filter>-->
-        <!--<filter-name>UrlRewriteFilter</filter-name>-->
-        <!--<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>-->
-    <!--</filter>-->
+    <context-param>
+        <param-name>org.mortbay.jetty.servlet.SessionCookie</param-name>
+        <param-value>XSESSIONID</param-value>
+    </context-param>
 
-    <!--<filter-mapping>-->
-        <!--<filter-name>UrlRewriteFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-        <!--<dispatcher>REQUEST</dispatcher>-->
-        <!--<dispatcher>FORWARD</dispatcher>-->
-    <!--</filter-mapping>-->
+    <context-param>
+        <param-name>org.mortbay.jetty.servlet.SessionURL</param-name>
+        <param-value>none</param-value>
+    </context-param>
 
 </web-app>
