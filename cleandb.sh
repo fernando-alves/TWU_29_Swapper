@@ -1,0 +1,2 @@
+gradle resetdb
+gradle updatedb
