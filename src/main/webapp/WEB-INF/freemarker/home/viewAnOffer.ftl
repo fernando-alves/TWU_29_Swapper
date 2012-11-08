@@ -4,6 +4,7 @@
 </head>
 <body>
 
+<h1 id="username" align="right">Welcome, ${username}</h1>
 
 <table>
     Offer owner : ${theOffer.owner} <br/>
