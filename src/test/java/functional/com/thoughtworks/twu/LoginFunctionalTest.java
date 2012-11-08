@@ -11,6 +11,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 public class LoginFunctionalTest {
 
@@ -55,10 +56,8 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("username")).sendKeys(username);
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
-
-        String expectedUrl = webDriver.getCurrentUrl();
-
-        assertThat(expectedUrl.contains("http://127.0.0.1:8080/twu"), is(true));
+        WebElement clickButton = webDriver.findElement(By.id("createOffer"));
+        assertNotNull(clickButton);
 
     }
 
@@ -72,10 +71,6 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
         webDriver.get("http://127.0.0.1:8080/twu/");
-
-        String expectedUrl = webDriver.getCurrentUrl();
-
-        assertThat(expectedUrl.contains("http://127.0.0.1:8080/twu"), is(true));
 
         WebElement userNameOnShowPage = webDriver.findElement(By.id("username"));
         assertThat(userNameOnShowPage.getText().contains(username), is(true));
