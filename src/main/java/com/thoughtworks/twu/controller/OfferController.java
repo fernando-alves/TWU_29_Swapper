@@ -13,12 +13,13 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 @Controller
 @SessionAttributes({"username"})
 @Transactional
 @RequestMapping("/offer")
-public class CreateOfferController {
+public class OfferController {
     private String title;
     private String category;
     private String description;
@@ -29,10 +30,10 @@ public class CreateOfferController {
 
     private String id;
 
-    public CreateOfferController() {
+    public OfferController() {
     }
 
-    public CreateOfferController(OfferServiceInterface offerService) {
+    public OfferController(OfferServiceInterface offerService) {
         this.offerService = offerService;
     }
 
@@ -43,7 +44,7 @@ public class CreateOfferController {
 
     @RequestMapping(value = "/createAnOffer", method = RequestMethod.POST)
     public View createOffer(@RequestParam("title") String title, @RequestParam("category") String category,
-                            @RequestParam("description") String description, HttpServletRequest request) {
+                            @RequestParam("description") String description, HttpServletRequest request, Date creationTime) {
         this.title = title;
         this.category = category;
         this.description = description;
@@ -79,7 +80,7 @@ public class CreateOfferController {
     }
 
     private String createOffer(String title, String category, String description, String username) {
-        Offer offer = new Offer(title, description, category, username);
+        Offer offer = new Offer(title, description, category, username, new Date());
         return offerService.saveOffer(offer);
     }
 

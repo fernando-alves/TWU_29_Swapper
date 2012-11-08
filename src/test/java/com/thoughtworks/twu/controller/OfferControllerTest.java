@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +30,13 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 @Transactional
-public class CreateOfferControllerTest {
+public class OfferControllerTest {
 
     @Autowired
     OfferServiceInterface offerServiceInterface;
 
     private OfferServiceInterface mockOfferService;
-    private CreateOfferController createOfferController;
+    private OfferController offerController;
     private String title;
     private String category;
     private String description;
@@ -43,11 +44,12 @@ public class CreateOfferControllerTest {
     private MockHttpServletRequest request;
     private HttpSession session;
     private HomeController homeController;
+    private Date creationTime;
 
     @Before
     public void setUp() {
         mockOfferService = mock(OfferService.class);
-        createOfferController = new CreateOfferController(mockOfferService);
+        offerController = new OfferController(mockOfferService);
         title = "this is a title";
         category = "Cars";
         description = "there is some descriptions";
@@ -55,11 +57,12 @@ public class CreateOfferControllerTest {
         homeController = new HomeController();
         request = new MockHttpServletRequest();
         session = request.getSession();
+        creationTime = new Date();
     }
 
     @Test
-    public void shouldGoToCreateOffer() {
-        String actualUrl = createOfferController.goToCreatingOfferPage();
+    public void shouldGoToCreateOfferPage() {
+        String actualUrl = offerController.goToCreatingOfferPage();
         String expectedUrl = "home/createOffer";
 
         assertThat(expectedUrl, is(actualUrl));
@@ -68,24 +71,24 @@ public class CreateOfferControllerTest {
     @Test
     public void shouldSaveOfferCorrectly() {
         createAnOffer();
-        Offer offer = new Offer(title, description, category, owner);
+        Offer offer = new Offer(title, description, category, owner, creationTime);
 
         verify(mockOfferService).saveOffer(offer);
     }
 
     @Test
-    public void shouldReturnTheCorrectUrlToDisplayOfferPageAfterCreatingOffer() {
+    public void shouldReturnOfferPageAfterCreatingOffer() {
         createAnOffer();
-        String actualUrl = createOfferController.viewAnOfferAfterCreating(new ModelMap());
-        String expectedUrl = "home/viewAnOffer";
+        String actualView = offerController.viewAnOfferAfterCreating(new ModelMap());
+        String expectedView = "home/viewAnOffer";
 
-        assertThat(expectedUrl, is(actualUrl));
+        assertThat(expectedView, is(actualView));
     }
 
     @Test
     public void shouldReturnTheCorrectUrlToDisplayOfferFromBrowse() {
         createAnOffer();
-        String actualUrl = createOfferController.viewAnOfferFromBrowse(new ModelMap(), "");
+        String actualUrl = offerController.viewAnOfferFromBrowse(new ModelMap(), "");
         String expectedUrl = "home/viewAnOffer";
 
         assertThat(expectedUrl, is(actualUrl));
@@ -95,7 +98,7 @@ public class CreateOfferControllerTest {
     public void shouldReturnTheCorrectAttributeFromModelMapAfterCreatingOffer() {
         createAnOffer();
         ModelMap modelMap = new ModelMap();
-        createOfferController.viewAnOfferAfterCreating(modelMap);
+        offerController.viewAnOfferAfterCreating(modelMap);
 
         assertTrue(modelMap.containsAttribute("theOffer"));
     }
@@ -104,29 +107,29 @@ public class CreateOfferControllerTest {
     public void shouldReturnTheCorrectAttributeFromModelMapFromBrowse() {
         createAnOffer();
         ModelMap modelMap = new ModelMap();
-        createOfferController.viewAnOfferAfterCreating(modelMap);
+        offerController.viewAnOfferAfterCreating(modelMap);
 
         assertTrue(modelMap.containsAttribute("theOffer"));
     }
 
     @Test
-    public void shouldExposeAllOffersToBrowseView() throws Exception {
+    public void shouldCallOfferServiceForBrowseViewPage() throws Exception {
 
         OfferService offerService = mock(OfferService.class);
-        CreateOfferController createOfferController = new CreateOfferController(offerService);
+        OfferController offerController = new OfferController(offerService);
 
         List<Offer> expectedOffers = new ArrayList<Offer>();
 
-        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me");
-        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You");
-        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else");
+        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me", new Date());
+        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You", new Date());
+        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else", new Date());
 
         expectedOffers.add(thirdOffer);
         expectedOffers.add(secondOffer);
         expectedOffers.add(firstOffer);
 
         when(offerService.getAll()).thenReturn(expectedOffers);
-        ModelAndView modelAndView = createOfferController.browse(request, session);
+        ModelAndView modelAndView = offerController.browse(request, session);
         Map<String, Object> model = modelAndView.getModel();
 
         List<Offer> actualOffers = (List<Offer>) model.get("allOffers");
@@ -147,7 +150,9 @@ public class CreateOfferControllerTest {
         MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.setSession(session1);
 
-        createOfferController.createOffer(title, category, description, request1);
+        offerController.createOffer(title, category, description, request1, creationTime);
     }
+
+
 
 }

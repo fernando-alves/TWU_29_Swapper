@@ -9,12 +9,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Date;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class CreateOfferFunctionalTest {
+public class OfferFunctionalTest {
 
 
     private WebDriver webDriver;
@@ -34,14 +36,20 @@ public class CreateOfferFunctionalTest {
 
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
+        String actualTitleText = getTitleTagFromPage();
 
-        String expectedUrl = "http://127.0.0.1:8080/twu/offer/create";
-        assertThat(webDriver.getCurrentUrl(), is(expectedUrl));
+        String expectedTitle = "Create Offer";
+        assertThat(actualTitleText, is(expectedTitle));
 
     }
 
+    private String getTitleTagFromPage() {
+        WebElement actualTitle = webDriver.findElement(By.tagName("title"));
+        return actualTitle.getText();
+    }
+
     @Test
-    public void showGoToViewAnOfferPage() throws InterruptedException {
+    public void shouldGoToViewAnOfferPage() throws InterruptedException {
         logIn();
 
         Thread.sleep(1000);
@@ -54,12 +62,15 @@ public class CreateOfferFunctionalTest {
         webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(1000);
-        String expectedUrl = "http://127.0.0.1:8080/twu/offer/viewAnOfferAfterCreating?username=test.twu";
-        assertThat(expectedUrl, is(webDriver.getCurrentUrl()));
+
+        String actualTitleText = getTitleTagFromPage();
+
+        String expectedTitle = "View An Offer";
+        assertThat(expectedTitle, is(actualTitleText));
     }
 
     @Test
-    public void showGoToViewAnOfferPageFromBrowse() throws InterruptedException {
+    public void shouldGoToViewAnOfferPageFromBrowse() throws InterruptedException {
         logIn();
 
         Thread.sleep(1000);
@@ -67,7 +78,11 @@ public class CreateOfferFunctionalTest {
 
         webDriver.findElement(By.id("offer1")).click();
         Thread.sleep(1000);
-        assertTrue(webDriver.getCurrentUrl().contains("http://127.0.0.1:8080/twu/offer/viewAnOfferFromBrowse?offerId="));
+
+        String actualTitleText = getTitleTagFromPage();
+
+        String expectedTitle = "View An Offer";
+        assertThat(expectedTitle, is(actualTitleText));
     }
 
     @Test
@@ -76,6 +91,19 @@ public class CreateOfferFunctionalTest {
 
         webDriver.findElement(By.id("createOffer")).click();
         WebElement titleTextBox = webDriver.findElement(By.name("description"));
+
+        assertThat(titleTextBox.isDisplayed(), is(true));
+    }
+
+    @Test
+    public void shouldDisplayListOfOffersOnTheBrowsePage() {
+        logIn();
+
+        webDriver.findElement(By.id("createOffer")).click();
+        WebElement titleTextBox = webDriver.findElement(By.name("description"));
+
+
+
 
         assertThat(titleTextBox.isDisplayed(), is(true));
     }
@@ -109,6 +137,14 @@ public class CreateOfferFunctionalTest {
     }
 
     @Test
+    public void shouldCheckExistenceOfBrowseOfferLink() {
+        logIn();
+
+        WebElement clickButton = webDriver.findElement(By.id("browse"));
+        assertNotNull(clickButton);
+    }
+
+    @Test
     public void shouldDisplayUsername() {
         logIn();
 
@@ -116,6 +152,46 @@ public class CreateOfferFunctionalTest {
 
         assertThat(userNameOnCreatePage.getText().contains(username), is(true));
     }
+
+    @Test
+    public void shouldDisplayUsernameOnBrowseOfferPage() {
+        logIn();
+
+
+
+        WebElement userNameOnBrowsePage = webDriver.findElement(By.id("username"));
+
+        assertThat(userNameOnBrowsePage.getText().contains(username), is(true));
+    }
+
+    @Test
+    public void shouldCreateOfferAndBeDisplayedAtTheTopOfBrowsePage() throws InterruptedException {
+        logIn();
+        Date uniqueDate = new Date();
+        String testTitle = uniqueDate.toString();
+
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+        webDriver.findElement(By.name("title")).sendKeys(testTitle);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+
+        webDriver.get("http://127.0.0.1:8080/twu/");
+        webDriver.findElement(By.id("browse")).click();
+        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
+
+        assertThat(firstOffer.getText(),is(testTitle));
+
+    }
+
+
+
 
     @After
     public void tearDown() throws Exception {

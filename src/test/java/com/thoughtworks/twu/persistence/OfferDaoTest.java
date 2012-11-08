@@ -10,6 +10,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -34,7 +35,7 @@ public class OfferDaoTest {
        String offerCategory = "ANIMAL";
        String offerOwner = "Hermione";
 
-       Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner);
+       Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
        String generatedId = offerDao.saveOffer(offer);
 
        Offer offerFromDatabase = offerDao.getOfferById(generatedId);
@@ -49,7 +50,7 @@ public class OfferDaoTest {
         String offerCategory = "HOUSE";
         String offerOwner = "Dumbledore";
 
-        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner);
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
 
         String generatedId = offerDao.saveOffer(offer);
 
@@ -65,14 +66,14 @@ public class OfferDaoTest {
         String offerCategory = "HOUSE";
         String offerOwner = "Dumbledore";
 
-        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner);
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
 
         String secondOfferTitle = "My cat";
         String secondOfferDescription = "Hey, feed my cat!";
         String secondOfferCategory = "ANIMAL";
         String secondOfferOwner = "Hermoine";
 
-        Offer secondOffer = new Offer(secondOfferTitle,secondOfferDescription,secondOfferCategory,secondOfferOwner);
+        Offer secondOffer = new Offer(secondOfferTitle,secondOfferDescription,secondOfferCategory,secondOfferOwner, new Date());
 
         offerDao.saveOffer(offer);
         offerDao.saveOffer(secondOffer);

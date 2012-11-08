@@ -12,5 +12,6 @@ CREATE TABLE Offer (
     Description text not null,
     Category varchar(80) not null,
     Owner varchar(80),
+    CreationTime DATE not null,
     CONSTRAINT pk_offer PRIMARY KEY (Id)
 );

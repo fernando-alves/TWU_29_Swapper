@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "Offer")
@@ -27,15 +28,19 @@ public class Offer implements Serializable {
     @Column(name = "Owner")
     private String owner;
 
+    @Column(name = "CreationTime")
+    private Date creationTime;
+
     public Offer(){
 
     }
 
-    public Offer(String title, String description, String category, String owner) {
+    public Offer(String title, String description, String category, String owner, Date creationTime) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.owner = owner;
+        this.creationTime = creationTime;
     }
 
     public Offer(String id, String title, String description, String category, String owner) {
@@ -82,14 +87,20 @@ public class Offer implements Serializable {
         return id;
     }
 
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Offer offer = (Offer) o;
+        String timeString = creationTime.toString();
 
         if (category != null ? !category.equals(offer.category) : offer.category != null) return false;
+        if (timeString != null ? !timeString.equals(offer.creationTime.toString()) : offer.creationTime.toString() != null) return false;
         if (description != null ? !description.equals(offer.description) : offer.description != null) return false;
         if (id != null ? !id.equals(offer.id) : offer.id != null) return false;
         if (owner != null ? !owner.equals(offer.owner) : offer.owner != null) return false;
@@ -105,6 +116,7 @@ public class Offer implements Serializable {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
         return result;
     }
 
@@ -116,6 +128,7 @@ public class Offer implements Serializable {
                 ", description='" + description + '\'' +
                 ", category='" + category + '\'' +
                 ", owner='" + owner + '\'' +
+                ", creationTime=" + creationTime +
                 '}';
     }
 }
