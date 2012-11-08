@@ -77,7 +77,8 @@ public class LoginFunctionalTest {
 
         assertThat(expectedUrl.contains("http://127.0.0.1:8080/twu"), is(true));
 
-        webDriver.getPageSource().contains("test.twu");
+        WebElement userNameOnShowPage = webDriver.findElement(By.id("username"));
+        assertThat(userNameOnShowPage.getText().contains(username), is(true));
 
     }
 
