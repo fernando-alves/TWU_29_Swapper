@@ -45,7 +45,7 @@ public class OfferControllerTest {
     private boolean hidden;
     private HttpSession session;
     private HomeController homeController;
-    private Date creationTime;
+    private Date creationTime = new Date();
 
     @Before
     public void setUp() {
@@ -58,7 +58,6 @@ public class OfferControllerTest {
         homeController = new HomeController();
         request = new MockHttpServletRequest();
         session = request.getSession();
-        creationTime = new Date();
         hidden = false;
     }
 
@@ -73,7 +72,8 @@ public class OfferControllerTest {
 
     @Test
     public void shouldSaveOfferCorrectly() {
-        createAnOffer();
+        final Date creationTime = new Date();
+        createAnOffer(creationTime);
         Offer offer = new Offer(title, description, category, owner, creationTime, false);
 
         verify(mockOfferService).saveOffer(offer);
@@ -165,6 +165,16 @@ public class OfferControllerTest {
 
 
     private void createAnOffer() {
+        HttpSession session1 = mock(HttpSession.class);
+        when(session1.getAttribute("username")).thenReturn("Qiushi");
+        MockHttpServletRequest request1 = new MockHttpServletRequest();
+        request1.setSession(session1);
+
+        offerController.createOffer(title, category, description, request1, creationTime,hidden);
+
+    }
+
+    private void createAnOffer(Date creationTime) {
         HttpSession session1 = mock(HttpSession.class);
         when(session1.getAttribute("username")).thenReturn("Qiushi");
         MockHttpServletRequest request1 = new MockHttpServletRequest();

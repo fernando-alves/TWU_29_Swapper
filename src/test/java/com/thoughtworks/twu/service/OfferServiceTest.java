@@ -40,9 +40,9 @@ public class OfferServiceTest {
         List<Offer> expectedResult = new ArrayList<Offer>();
         List<Offer> inputResult = new ArrayList<Offer>();
 
-        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me", new Date());
-        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You", new Date());
-        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else", new Date());
+        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me", new Date(), false);
+        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You", new Date(), false);
+        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else", new Date(), false);
         inputResult.add(firstOffer);
         inputResult.add(secondOffer);
         inputResult.add(thirdOffer);

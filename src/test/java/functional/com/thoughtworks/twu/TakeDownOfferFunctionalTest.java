@@ -30,7 +30,7 @@ public class TakeDownOfferFunctionalTest {
     }
 
     @Test
-    public void shouldHideAnOffer() throws Exception {
+    public void shouldGoToHomeAfterHideAnOffer() throws Exception {
 
         logIn();
 
@@ -51,11 +51,11 @@ public class TakeDownOfferFunctionalTest {
 
         webDriver.findElement(By.id("takeDownButton")).click();
 
-        webDriver.findElement(By.id("browse")).click();
+        String pageTitle = webDriver.getTitle();
 
-        WebElement offerElement = webDriver.findElement(By.linkText(offerTitle));
+        String expectedPageTitle = "TWU Demo";
 
-        assertThat(offerElement, is(nullValue()));
+        assertThat(expectedPageTitle, is(pageTitle));
 
     }
 
