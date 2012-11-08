@@ -44,7 +44,7 @@ public class OfferController {
 
     @RequestMapping(value = "/createAnOffer", method = RequestMethod.POST)
     public View createOffer(@RequestParam("title") String title, @RequestParam("category") String category,
-                            @RequestParam("description") String description, HttpServletRequest request, Date creationTime) {
+                            @RequestParam("description") String description, HttpServletRequest request, Date creationTime, boolean hidden) {
         this.title = title;
         this.category = category;
         this.description = description;
@@ -54,6 +54,14 @@ public class OfferController {
         setId(id);
 
         return new RedirectView("viewAnOfferAfterCreating");
+    }
+
+    @RequestMapping(value = "/takedown", method = RequestMethod.GET)
+    public RedirectView takeDownOffer(@ModelAttribute("offerId") String offerId) {
+
+        offerService.takeDownOffer(offerId);
+
+        return new RedirectView("/twu/");
     }
 
     @RequestMapping("viewAnOfferAfterCreating")
@@ -80,7 +88,7 @@ public class OfferController {
     }
 
     private String createOffer(String title, String category, String description, String username) {
-        Offer offer = new Offer(title, description, category, username, new Date());
+        Offer offer = new Offer(title, description, category, username, new Date(), false);
         return offerService.saveOffer(offer);
     }
 

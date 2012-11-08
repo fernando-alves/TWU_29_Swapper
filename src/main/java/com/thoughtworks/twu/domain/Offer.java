@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.domain;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,25 +32,23 @@ public class Offer implements Serializable {
     @Column(name = "CreationTime")
     private Date creationTime;
 
+    @Column(name = "Hidden", columnDefinition = "TINYINT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean hidden;
+
     public Offer(){
 
     }
 
-    public Offer(String title, String description, String category, String owner, Date creationTime) {
+    public Offer(String title, String description, String category, String owner, Date creationTime, boolean hidden) {
         this.title = title;
         this.description = description;
         this.category = category;
         this.owner = owner;
         this.creationTime = creationTime;
+        this.hidden = hidden;
     }
 
-    public Offer(String id, String title, String description, String category, String owner) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.owner = owner;
-    }
 
     public String getTitle() {
         return title;
@@ -130,5 +129,13 @@ public class Offer implements Serializable {
                 ", owner='" + owner + '\'' +
                 ", creationTime=" + creationTime +
                 '}';
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 }

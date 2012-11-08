@@ -36,4 +36,9 @@ public class OfferService implements OfferServiceInterface {
 
         return reverseList;
     }
+
+    @Override
+    public void takeDownOffer(String offerId) {
+        offerDao.takeDown(offerId);
+    }
 }

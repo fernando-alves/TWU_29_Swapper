@@ -8,4 +8,6 @@ public interface OfferServiceInterface {
     Offer getOfferById(String offerId);
     String saveOffer(Offer offer);
     List<Offer> getAll();
+
+    void takeDownOffer(String offerId);
 }

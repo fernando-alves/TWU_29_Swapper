@@ -35,7 +35,7 @@ public class OfferDaoTest {
        String offerCategory = "ANIMAL";
        String offerOwner = "Hermione";
 
-       Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
+       Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date(), false);
        String generatedId = offerDao.saveOffer(offer);
 
        Offer offerFromDatabase = offerDao.getOfferById(generatedId);
@@ -50,8 +50,7 @@ public class OfferDaoTest {
         String offerCategory = "HOUSE";
         String offerOwner = "Dumbledore";
 
-        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
-
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date(), false);
         String generatedId = offerDao.saveOffer(offer);
 
         Offer offerFromDatabase = offerDao.getOfferById(generatedId);
@@ -66,14 +65,14 @@ public class OfferDaoTest {
         String offerCategory = "HOUSE";
         String offerOwner = "Dumbledore";
 
-        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date());
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date(), false);
 
         String secondOfferTitle = "My cat";
         String secondOfferDescription = "Hey, feed my cat!";
         String secondOfferCategory = "ANIMAL";
         String secondOfferOwner = "Hermoine";
 
-        Offer secondOffer = new Offer(secondOfferTitle,secondOfferDescription,secondOfferCategory,secondOfferOwner, new Date());
+        Offer secondOffer = new Offer(secondOfferTitle,secondOfferDescription,secondOfferCategory,secondOfferOwner, new Date(),false);
 
         offerDao.saveOffer(offer);
         offerDao.saveOffer(secondOffer);
@@ -86,4 +85,25 @@ public class OfferDaoTest {
         assertThat(allOffers.containsAll(expectedOffers), is(true));
 
     }
+
+    @Test
+    public void shouldTakeDownOffer() {
+        String offerTitle = "House on England";
+        String offerDescription = "Harrys house";
+        String offerCategory = "HOUSE";
+        String offerOwner = "Dumbledore";
+
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date(), false);
+
+        String offerId = offerDao.saveOffer(offer);
+
+        offerDao.takeDown(offerId);
+
+        Offer databaseOffer = offerDao.getOfferById(offerId);
+        boolean isOfferHidden = databaseOffer.isHidden();
+
+        assertThat(isOfferHidden, is(true));
+
+    }
+
 }

@@ -42,6 +42,7 @@ public class OfferControllerTest {
     private String description;
     private String owner;
     private MockHttpServletRequest request;
+    private boolean hidden;
     private HttpSession session;
     private HomeController homeController;
     private Date creationTime;
@@ -58,10 +59,12 @@ public class OfferControllerTest {
         request = new MockHttpServletRequest();
         session = request.getSession();
         creationTime = new Date();
+        hidden = false;
     }
 
+
     @Test
-    public void shouldGoToCreateOfferPage() {
+    public void shouldGoToCreateOffer() {
         String actualUrl = offerController.goToCreatingOfferPage();
         String expectedUrl = "home/createOffer";
 
@@ -71,7 +74,7 @@ public class OfferControllerTest {
     @Test
     public void shouldSaveOfferCorrectly() {
         createAnOffer();
-        Offer offer = new Offer(title, description, category, owner, creationTime);
+        Offer offer = new Offer(title, description, category, owner, creationTime, false);
 
         verify(mockOfferService).saveOffer(offer);
     }
@@ -83,6 +86,13 @@ public class OfferControllerTest {
         String expectedView = "home/viewAnOffer";
 
         assertThat(expectedView, is(actualView));
+    }
+    public void shouldReturnTheCorrectUrlToDisplayOfferPageAfterCreatingOffer() {
+        createAnOffer();
+        String actualUrl = offerController.viewAnOfferAfterCreating(new ModelMap());
+        String expectedUrl = "home/viewAnOffer";
+
+        assertThat(expectedUrl, is(actualUrl));
     }
 
     @Test
@@ -114,15 +124,14 @@ public class OfferControllerTest {
 
     @Test
     public void shouldCallOfferServiceForBrowseViewPage() throws Exception {
-
         OfferService offerService = mock(OfferService.class);
         OfferController offerController = new OfferController(offerService);
 
         List<Offer> expectedOffers = new ArrayList<Offer>();
 
-        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me", new Date());
-        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You", new Date());
-        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else", new Date());
+        Offer firstOffer = new Offer("Title 1", "Category 1", "Description 1", "Me", new Date(),false);
+        Offer secondOffer = new Offer("Title 2", "Category 2", "Description 2", "You", new Date(),false);
+        Offer thirdOffer = new Offer("Title 3", "Category 3", "Description 3", "Someone else", new Date(),false);
 
         expectedOffers.add(thirdOffer);
         expectedOffers.add(secondOffer);
@@ -144,15 +153,25 @@ public class OfferControllerTest {
         assertThat(session.getAttribute("username").toString(), is("Fernando"));
     }
 
+    @Test
+    public void shouldTakeDownOffer(){
+        String offerId = "34134134";
+        offerController.takeDownOffer(offerId);
+
+        verify(mockOfferService).takeDownOffer(offerId);
+
+
+    }
+
+
     private void createAnOffer() {
         HttpSession session1 = mock(HttpSession.class);
         when(session1.getAttribute("username")).thenReturn("Qiushi");
         MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.setSession(session1);
 
-        offerController.createOffer(title, category, description, request1, creationTime);
+        offerController.createOffer(title, category, description, request1, creationTime,hidden);
+
     }
-
-
 
 }
