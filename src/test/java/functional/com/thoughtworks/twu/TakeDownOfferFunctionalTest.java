@@ -53,9 +53,9 @@ public class TakeDownOfferFunctionalTest {
 
         String pageTitle = webDriver.getTitle();
 
-        String expectedPageTitle = "TWU Demo";
+        String expectedPageTitle = "Carousel Template · Bootstrap";
 
-        assertThat(expectedPageTitle, is(pageTitle));
+        assertThat(pageTitle, is(expectedPageTitle));
 
     }
 
