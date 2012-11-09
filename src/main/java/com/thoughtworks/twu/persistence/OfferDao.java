@@ -20,13 +20,14 @@ public class OfferDao {
     }
 
     public Offer getOfferById(String offerId) {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Offer where id=?").setParameter(0, offerId);
+        Query query = sessionFactory.getCurrentSession().createQuery("from Offer where Id=?").setParameter(0, offerId);
         Offer offer = (Offer) query.uniqueResult();
         return offer;
     }
 
     public List<Offer> getAll() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Offer");
+        Query query = sessionFactory.getCurrentSession().createQuery("from Offer where Hidden = 'false'");
+
         return (List<Offer>) query.list();
     }
 

@@ -116,4 +116,28 @@ public class OfferDaoTest {
         sessionFactory.getCurrentSession().clear();
     }
 
+    @Test
+    public void shouldNotRetrieveHiddenOffers() {
+        String offerTitle = "House on England";
+        String offerDescription = "Harrys house";
+        String offerCategory = "HOUSE";
+        String offerOwner = "Dumbledore";
+
+        Offer offer = new Offer(offerTitle, offerDescription, offerCategory, offerOwner, new Date(), false);
+
+        String offerId = offerDao.saveOffer(offer);
+
+        offerDao.takeDown(offerId);
+
+        boolean testOfferExist = false;
+        List<Offer> databaseOffer = offerDao.getAll();
+        for (Offer offer1 : databaseOffer) {
+            if(offer1.getId() == offerId)
+                testOfferExist = true;
+
+        }
+
+        assertThat(testOfferExist, is(false));
+
+    }
 }
