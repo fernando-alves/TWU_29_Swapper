@@ -14,7 +14,7 @@
             Title: <br/>
             <input type="text" name="title" maxlength="100"/> <br/>
             Category: <br/>
-            <select name="category" id="selectCategory">
+            <select name="category">
                 <option value="Books">Books</option>
                 <option value="Cars">Cars</option>
                 <option value="Housing">Housing</option>

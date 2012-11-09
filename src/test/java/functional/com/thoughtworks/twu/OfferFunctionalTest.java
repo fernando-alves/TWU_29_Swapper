@@ -18,7 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 public class OfferFunctionalTest {
 
-
     private WebDriver webDriver;
     private String username;
     private String password;
@@ -217,7 +216,6 @@ public class OfferFunctionalTest {
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
 
         assertThat(firstOffer.getText(),is(testTitle));
-
     }
 
     @After
