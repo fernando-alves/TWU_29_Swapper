@@ -52,19 +52,17 @@
 <div style="width: 100%;">
     <div id="sidebar-left">
     </div>
+    <div id="sidebar-right">
+    </div>
     <div>
-        <table>
-            Title : ${theOffer.title} <br/>
-            Category : ${theOffer.category} <br/>
-            Description : ${theOffer.description} <br/>
-            Contact offer owner : ${theOffer.owner}@thoughtworks.com</br>
-        </table>
+        Title : ${theOffer.title} <br/>
+        Category : ${theOffer.category} <br/>
+        Description : ${theOffer.description} <br/>
+        Contact offer owner : ${theOffer.owner}@thoughtworks.com</br>
         <form name="user" action="/twu/offer/takedown" method="get">
             <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
-            <input id="takeDownButton" type="submit" value="   Take Down   " name="submit" />
+            <input id="takeDownButton" type="submit" value="   Take Down   " name="submit"/>
         </form>
-    </div>
-    <div id="sidebar-right">
     </div>
 </div>
 <div style="clear:both"></div>

@@ -1,6 +1,8 @@
 package com.thoughtworks.twu.persistence;
 
 import com.thoughtworks.twu.domain.Offer;
+import org.hibernate.SessionFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class OfferDaoTest {
     @Autowired
     private OfferDao offerDao;
 
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Test
     public void shouldSaveAnimalOfferCorrectly(){
@@ -104,6 +108,12 @@ public class OfferDaoTest {
 
         assertThat(isOfferHidden, is(true));
 
+    }
+
+    @Before
+    public void setUp(){
+        sessionFactory.getCurrentSession().createQuery("delete from Offer").executeUpdate();
+        sessionFactory.getCurrentSession().clear();
     }
 
 }
