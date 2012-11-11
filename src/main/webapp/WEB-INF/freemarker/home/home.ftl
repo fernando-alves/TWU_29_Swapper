@@ -52,8 +52,11 @@
 
                     <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
                         porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                    <a href="offer/create" id="createOffer" class="btn btn-large btn-primary" href="#">Create Offer</a>
-                    <a href="offer/browse" id="browse" class="btn btn-large btn-primary" href="#">Browse Offer</a>
+                    <div class="offer-button">
+                        <a href="offer/create" id="createOffer" class="btn btn-large btn-primary" href="#">Create Offer</a>
+                        <a href="offer/browse" id="browse" class="btn btn-large btn-primary" href="#">Browse Offer</a>
+                    </div>
+
                 </div>
             </div>
         </div>

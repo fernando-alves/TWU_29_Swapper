@@ -4,19 +4,43 @@ body {
     color: #5a5a5a;
 }
 
-footer {
-    position: absolute;
-    left: 30%;
-    bottom: 5%;
+.header{
+    border-bottom: solid 10px #000;
 }
-
 .header-image {
-    border-bottom: solid #000 10px;
-
+    height: 200px;
 }
 
 .main-container {
     width: 100%;
+}
+
+.display-an-offer {
+    padding-left: 19%;
+
+}
+.display-an-offer dt {
+    font-size: 20px;
+    color: #000;
+
+}
+
+.display-an-offer dd {
+    width: 75%;
+    word-break: break-all;
+    word-wrap:break-word;
+    overflow: hidden;
+    border-bottom: solid #999 3px;
+    padding: 12px 0 7px 0;
+    margin-bottom: 15px;
+}
+
+.display-offer-information {
+    padding-top: 5%;
+}
+
+.display-offer-information dl {
+    margin-top: 0px;
 }
 
 .float-clear {
@@ -42,7 +66,14 @@ footer {
     height: 80%;
     background-color: #f7f7f7;
 }
-
+footer {
+    position: absolute;
+    left: 30%;
+    bottom: 5%;
+}
+.offer-button a {
+    margin-right: 7%;
+}
 /* GLOBAL STYLES
 -------------------------------------------------- */
 /* Padding below the footer and lighter body text */

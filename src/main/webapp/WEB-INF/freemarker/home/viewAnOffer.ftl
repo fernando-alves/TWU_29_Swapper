@@ -42,32 +42,41 @@
 </div>
 
 <div id="myCarousel">
-    <div class="carousel-inner">
-        <div class="active pos-1" style="background-color: #000;">
-            <img src="../../../twu/static/img/DetailPage.jpg" id="abc" style="margin-bottom: 1%;"/>
+    <div class="carousel-inner header">
+        <div class="active pos-1 header-image">
+            <img src="../../../twu/static/img/DetailPage.jpg"/>
         </div>
     </div>
 </div>
 
-<div style="width: 100%;">
+<div class="main-container">
     <div id="sidebar-left">
     </div>
     <div id="sidebar-right">
     </div>
-    <div>
-        Title : ${theOffer.title} <br/>
-        Category : ${theOffer.category} <br/>
-        Description : ${theOffer.description} <br/>
-        Contact offer owner : ${theOffer.owner}@thoughtworks.com</br>
-        <form name="user" action="/twu/offer/takedown" method="get">
-            <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
-            <input id="takeDownButton" type="submit" value="   Take Down   " name="submit"/>
-        </form>
+    <div class="display-an-offer">
+        <div class="display-offer-information">
+            <dl>
+                <dt>Title:</dt>
+                <dd>${theOffer.title}</dd>
+
+                <dt>Description:</dt>
+                <dd>${theOffer.description}</dd>
+
+                <dt>Contact offer owner :</dt>
+                <dd>${theOffer.owner}@thoughtworks.com</dd>
+            </dl>
+        </div>
+        <div>
+            <form name="user" action="/twu/offer/takedown" method="get">
+                <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
+                <input class="btn btn-primary" id="takeDownButton" type="submit" value="   Take Down   " name="submit"/>
+            </form>
+        </div>
     </div>
-</div>
-<div style="clear:both"></div>
-<footer>
-    <div align="center">Copyright © 2012 ThoughtWorks Corporation, TWU-29, Swapper Team, All Rights Reserved</div>
-</footer>
+    <div style="clear:both"></div>
+    <footer>
+        <div align="center">Copyright © 2012 ThoughtWorks Corporation, TWU-29, Swapper Team, All Rights Reserved</div>
+    </footer>
 </body>
 </html>
