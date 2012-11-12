@@ -192,12 +192,22 @@ public class OfferFunctionalTest {
 
         webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
+<<<<<<< HEAD
         Thread.sleep(2000);
+=======
+
+      //  Thread.sleep(1000);
+>>>>>>> fad8fee... rebasing
 
 
         webDriver.get("http://127.0.0.1:8080/twu/");
         webDriver.findElement(By.id("browse")).click();
+<<<<<<< HEAD
         Thread.sleep(2000);
+=======
+        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
+>>>>>>> fad8fee... rebasing
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
 
         assertThat(firstOffer.getText(),is(testTitle));
