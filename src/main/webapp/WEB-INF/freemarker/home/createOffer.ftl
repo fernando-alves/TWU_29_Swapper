@@ -1,6 +1,7 @@
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
-    <title>Carousel Template · Bootstrap</title>
+    <title>Add An Offer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,52 +33,45 @@
                     <li><a href="#contact">About</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#">Welcome, username</a></li>
+                    <li><a href="#">Welcome, ${username}</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
 </div>
-
 <div id="myCarousel">
-    <div class="carousel-inner">
-        <div class="active pos-1" style="background-color: #000;">
-            <img src="/../../../twu/static/img/DetailPage.jpg" id="abc" style="margin-bottom: 1%;">
+    <div class="carousel-inner header">
+        <div class="active pos-1 header-image">
+            <img src="../../../twu/static/img/DetailPage.jpg"/>
         </div>
     </div>
 </div>
-
-<div style="width: 100%;">
-
-    <div style="
-    background: #999;
-">
-
-        <fieldset style="
-    background: #FFF;
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px 214px;
-">
-            <legend style="
-    float: left;
-"> Add Offer</legend>
-            <form name="user" action="/twu/offer/createAnOffer" method="post">
-                Title: <br>
-                <input type="text" name="title" maxlength="100"> <br>
-                Category: <br>
-
-                <select name="category" id="selectCategory">
+<div class="main-container">
+    <div id="sidebar-left">
+    </div>
+    <div id="sidebar-right">
+    </div>
+    <div class="content-position">
+        <div class="content-position-information">
+     <form name="user" action="/twu/offer/createAnOffer" method="post">
+         <dl>
+         <dt>Title:</dt>
+         <dd>
+         <input type="text" name="title" maxlength="100"> <br></dd>
+         <dt>Category:</dt>
+         <dd>
+         <select name="category" id="selectCategory">
                     <option value="Books">Books</option>
                     <option value="Cars">Cars</option>
                     <option value="Housing">Housing</option>
                     <option value="Miscellaneous">Miscellaneous</option>
                     <option value="Services">Services</option>
-                </select><br>
-                Description:<br>
-                <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br>
-                <input type="submit" value="   Save   " name="submit">
+                </select><br></dd>
+
+         <dt>Description:</dt>
+             <dd> <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br></dd></dl>
+         <input class="btn btn-primary"  type="submit" value="   save   " name="submit">
             </form>
         </fieldset>
     </div>

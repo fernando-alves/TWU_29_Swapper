@@ -54,8 +54,8 @@
     </div>
     <div id="sidebar-right">
     </div>
-    <div class="display-an-offer">
-        <div class="display-offer-information">
+    <div class="content-position">
+        <div class="content-position-information">
             <dl>
                 <dt>Title:</dt>
                 <dd>${theOffer.title}</dd>
