@@ -52,8 +52,10 @@ public class OfferController {
 
         id = createOffer(this.title, this.category, this.description, username);
         setId(id);
+        RedirectView redirectView = new RedirectView("viewAnOfferAfterCreating");
+        redirectView.setExposeModelAttributes(false);
 
-        return new RedirectView("viewAnOfferAfterCreating");
+        return redirectView;
     }
 
     @RequestMapping(value = "/takedown", method = RequestMethod.GET)
@@ -61,7 +63,10 @@ public class OfferController {
 
         offerService.takeDownOffer(offerId);
 
-        return new RedirectView("/twu/");
+        RedirectView redirectView = new RedirectView("/twu/");
+        redirectView.setExposeModelAttributes(false);
+
+        return redirectView;
     }
 
     @RequestMapping("viewAnOfferAfterCreating")
