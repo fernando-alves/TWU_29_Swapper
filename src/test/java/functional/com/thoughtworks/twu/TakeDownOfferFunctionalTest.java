@@ -90,7 +90,7 @@ public class TakeDownOfferFunctionalTest {
         assertThat(offer.getText(), is(not((offerTitle))));
 
     }
-/* //do not delete this, we are still working on it!!!!!
+
     @Test (expected = NoSuchElementException.class)
     public void shouldNotDisplayTakeDownButtonIfDifferentOwner() throws InterruptedException {
         logIn();
@@ -118,7 +118,7 @@ public class TakeDownOfferFunctionalTest {
 
         webDriver.findElement(By.id("takeDownButton"));
 
-    }*/
+    }
 
     private void loginUser2() {
 

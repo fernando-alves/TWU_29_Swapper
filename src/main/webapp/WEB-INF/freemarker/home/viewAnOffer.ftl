@@ -71,8 +71,8 @@
 >>>>>>> adding functional test, still need one more
     <div id="sidebar-right">
     </div>
-    <div class="content-position">
-        <div class="content-position-information">
+    <div class="display-an-offer">
+        <div class="display-offer-information">
             <dl>
                 <dt>Title:</dt>
                 <dd>${theOffer.title}</dd>

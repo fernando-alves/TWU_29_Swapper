@@ -592,7 +592,7 @@ p {
   margin-bottom: 20px;
   font-size: 21px;
   font-weight: 200;
-  line-height: 20px;
+  line-height: 30px;
 }
 
 small {
@@ -1090,7 +1090,7 @@ input[type="file"] {
   *margin-top: 4px;
   /* For IE7, add top margin to align select with labels */
 
-  line-height: 20px;
+  line-height: 30px;
 }
 
 select {
@@ -5016,7 +5016,7 @@ input[type="submit"].btn.btn-mini {
 
 .modal-header h3 {
   margin: 0;
-  line-height: 20px;
+  line-height: 30px;
 }
 
 .modal-body {
@@ -5795,7 +5795,7 @@ a.badge:hover {
   margin-top: -20px;
   font-size: 60px;
   font-weight: 100;
-  line-height: 20px;
+  line-height: 30px;
   color: #ffffff;
   text-align: center;
   background: #222222;
@@ -5848,7 +5848,7 @@ a.badge:hover {
   margin-bottom: 30px;
   font-size: 18px;
   font-weight: 200;
-  line-height: 20px;
+  line-height: 30px;
   color: inherit;
   background-color: #eeeeee;
   -webkit-border-radius: 6px;
@@ -5865,7 +5865,7 @@ a.badge:hover {
 }
 
 .hero-unit li {
-  line-height: 20px;
+  line-height: 30px;
 }
 
 .pull-right {

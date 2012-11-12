@@ -6,7 +6,6 @@ body {
 
 .header{
     border-bottom: solid 10px #000;
-
 }
 .header-image {
     height: 200px;
@@ -16,17 +15,17 @@ body {
     width: 100%;
 }
 
-.content-position{
+.display-an-offer {
     padding-left: 19%;
 
 }
-.content-position dt{
+.display-an-offer dt {
     font-size: 20px;
     color: #000;
 
 }
 
-.content-position dd{
+.display-an-offer dd {
     width: 75%;
     word-break: break-all;
     word-wrap:break-word;
@@ -36,11 +35,11 @@ body {
     margin-bottom: 15px;
 }
 
-.content-position-information{
+.display-offer-information {
     padding-top: 5%;
 }
 
-.content-position-information dl {
+.display-offer-information dl {
     margin-top: 0px;
 }
 
