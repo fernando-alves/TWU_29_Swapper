@@ -15,17 +15,17 @@ body {
     width: 100%;
 }
 
-.display-an-offer {
+.content-position {
     padding-left: 19%;
 
 }
-.display-an-offer dt {
+.content-position dt {
     font-size: 20px;
     color: #000;
 
 }
 
-.display-an-offer dd {
+.content-position dd {
     width: 75%;
     word-break: break-all;
     word-wrap:break-word;
@@ -35,11 +35,11 @@ body {
     margin-bottom: 15px;
 }
 
-.display-offer-information {
+.content-position-information {
     padding-top: 5%;
 }
 
-.display-offer-information dl {
+.content-position-information dl {
     margin-top: 0px;
 }
 
