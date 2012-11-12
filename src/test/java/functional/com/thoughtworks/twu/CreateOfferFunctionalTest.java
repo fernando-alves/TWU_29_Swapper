@@ -176,7 +176,7 @@ public class CreateOfferFunctionalTest {
             add(title);
             add("TITLE IN TEST");
         }};
-        List<String> actualListOfTitles = new ArrayList<>();
+        List<String> actualListOfTitles = new ArrayList<String>();
         for (WebElement listOfWebElement : listOfWebElements) {
             actualListOfTitles.add(listOfWebElement.getText());
         }
