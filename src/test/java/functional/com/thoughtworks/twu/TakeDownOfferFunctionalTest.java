@@ -1,11 +1,11 @@
 package functional.com.thoughtworks.twu;
 
-import org.hamcrest.CoreMatchers;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,7 +13,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.GregorianCalendar;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
@@ -91,10 +94,24 @@ public class TakeDownOfferFunctionalTest {
 
         webDriver.findElement(By.id("browse")).click();
 
-        WebElement offer = webDriver.findElement(By.id("offer1"));
+        WebElement offer = findElementById("offer1");
 
         assertThat(offer.getText(), is(not((offerTitle))));
 
+    }
+
+    private WebElement findElementById(String id) {
+        try {
+            return webDriver.findElement(By.id(id));
+        } catch (NoSuchElementException e) {
+            String pageSource = webDriver.getPageSource();
+            try {
+                FileUtils.writeStringToFile(new File("build/lastPage.html"), pageSource);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            throw e;
+        }
     }
 
 
