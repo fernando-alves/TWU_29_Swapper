@@ -62,6 +62,7 @@
          <dt>Category:</dt>
          <dd>
          <select name="category" id="selectCategory">
+                    <option value="Books"></option>
                     <option value="Books">Books</option>
                     <option value="Cars">Cars</option>
                     <option value="Housing">Housing</option>
