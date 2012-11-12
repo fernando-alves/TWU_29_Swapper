@@ -73,6 +73,11 @@
                 <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
                 <#if "${username}" == "${theOffer.owner}"><input class="btn btn-primary" id="takeDownButton" type="submit" value="   Take Down   " name="submit"/></#if>
             </form>
+            <form action="https://mail.google.com/mail/?view=cm&fs=1&to=${theOffer.owner}@thoughtworks.com&su=I'm%20interested%20in%20your%20offer&body=I'd%20like%20to%20approach%20you%20regarding%20the%20details%20of%20your%20offer." method="post">
+            <#if "${username}"  != "${theOffer.owner}" >
+                <input type="submit" value="  Contact  " />
+            </#if>
+            </form>
         </div>
     </div>
     <div style="clear:both"></div>
