@@ -91,35 +91,6 @@ public class TakeDownOfferFunctionalTest {
 
     }
 
-    @Test (expected = NoSuchElementException.class)
-    public void shouldNotDisplayTakeDownButtonIfDifferentOwner() throws InterruptedException {
-        logIn();
-
-        Thread.sleep(1000);
-        webDriver.findElement(By.id("createOffer")).click();
-
-        String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
-        webDriver.findElement(By.name("title")).sendKeys(offerTitle);
-
-        Select select = new Select(webDriver.findElement(By.tagName("select")));
-        select.selectByValue("Cars");
-
-        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
-        webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
-
-        webDriver.get("https://castest.thoughtworks.com/cas/logout");
-
-        loginUser2();
-
-        webDriver.findElement(By.id("browse")).click();
-
-        webDriver.findElement(By.id("offer1")).click();
-
-        webDriver.findElement(By.id("takeDownButton"));
-
-    }
-
     private void loginUser2() {
 
         webDriver.get("http://127.0.0.1:8080/twu/");
