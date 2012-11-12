@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>View An Offer</title>
+    <title>Add An Offer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -27,10 +27,9 @@
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">Create Offer</a></li>
-                    <li><a href="#contact">Browse Offer</a></li>
-                    <li><a href="#contact">About</a></li>
+                    <li><a href="/twu">Home</a></li>
+                    <li><a href="/twu/offer/create">Create Offer</a></li>
+                    <li  class="active"><a href="#">Browse Offers</a></li>
                 </ul>
                 <ul class="nav pull-right">
                     <li><a href="#">Welcome, ${username}</a></li>
@@ -40,7 +39,6 @@
     </div>
 
 </div>
-
 <div id="myCarousel">
     <div class="carousel-inner header">
         <div class="active pos-1 header-image">
@@ -48,24 +46,26 @@
         </div>
     </div>
 </div>
-
 <div class="main-container">
     <div id="sidebar-left">
     </div>
     <div id="sidebar-right">
     </div>
-    <div class="display-an-offer">
-             <h1>Browse Offers</h1>
-             <ol>
-             <#assign i=0>
-             <#list allOffers as offer>
-                 <li><a href="viewAnOfferFromBrowse?offerId=${offer.getId()}" id="offer${i+1}">${offer.getTitle()}</a></li>
-             </#list>
-             </ol>
+    <div class="content-position">
+        <div class="content-position-information">
+            <ol>
+                <#assign i=0>
+                <#list allOffers as offer>
+                <li><a href="viewAnOfferFromBrowse?offerId=${offer.getId()}" id="offer${i+1}">${offer.getTitle()}</a></li>
+                </#list>
+            </ol>
+        </div>
     </div>
-    <div style="clear:both"></div>
-    <footer>
-        <div align="center">Copyright © 2012 ThoughtWorks Corporation, TWU-29, Swapper Team, All Rights Reserved</div>
-    </footer>
-</body>
-</html>
+
+</div>
+<div style="clear:both"></div>
+<footer>
+    <div align="center">Copyright © 2012 ThoughtWorks Corporation, TWU-29, Swapper Team, All Rights Reserved</div>
+</footer>
+
+</body></html>
