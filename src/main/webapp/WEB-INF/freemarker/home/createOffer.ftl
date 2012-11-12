@@ -54,25 +54,24 @@
     </div>
     <div class="content-position">
         <div class="content-position-information">
+            <h1>Create Offer</h1>
      <form name="user" action="createAnOffer" method="post">
-         <dl>
-         <dt>Title:</dt>
-         <dd>
-         <input type="text" name="title" maxlength="100"> <br></dd>
-         <dt>Category:</dt>
-         <dd>
+         <p>
+        <input class="input-block-level" type="text" name="title" maxlength="100" placeholder="Title">
+       </p>
+         <p>
          <select name="category" id="selectCategory">
-                    <option value="Books"></option>
+                    <option value="Books">Select a category</option>
                     <option value="Books">Books</option>
                     <option value="Cars">Cars</option>
                     <option value="Housing">Housing</option>
                     <option value="Miscellaneous">Miscellaneous</option>
                     <option value="Services">Services</option>
-                </select><br/></dd>
-
-         <dt>Description:</dt>
-             <dd> <textarea rows="4" cols="50" name="descriptionTxt" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br/></dd></dl>
-         <input class="btn btn-primary"  type="submit" value="   save   " name="submit" />
+                </select>
+</p>
+         <p>
+           <textarea rows="4" cols="50" name="descriptionTxt" placeholder="Description" maxlength="1000"></textarea>
+         </p><input class="btn btn-primary"  type="submit" value="   save   " name="submit" />
             </form>
         </fieldset>
     </div>

@@ -51,24 +51,15 @@
 <div class="main-container">
     <div id="sidebar-left">
     </div>
+
     <div id="sidebar-right">
     </div>
     <div class="content-position">
         <div class="content-position-information">
-            <dl>
-                <dt>Title:</dt>
-                <dd>${theOffer.title}</dd>
 
-                <dt>Category:</dt>
-                <dd>${theOffer.category}</dd>
-
-                <dt>Description:</dt>
-                <dd>${theOffer.description}</dd>
-
-                <dt>Contact offer owner :</dt>
-                <dd>${theOffer.owner}@thoughtworks.com</dd>
-            </dl>
-        </div>
+        <h1>${theOffer.title}</h1>
+        <span class="label label-info">${theOffer.category}</span>
+        <p>${theOffer.description}</p>
         <div>
             <form name="user" action="/twu/offer/takedown" method="get">
                 <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
@@ -83,6 +74,7 @@
                 <input type="submit" class="btn btn-primary" value="  Contact  "/>
             </#if>
             </form>
+        </div>
         </div>
     </div>
     <div style="clear:both"></div>

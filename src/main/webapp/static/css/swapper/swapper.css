@@ -37,6 +37,22 @@ body {
 
 .content-position-information {
     padding-top: 5%;
+    width: 80%;
+}
+
+.content-position-information form {
+    text-align: left;
+
+}
+
+.content-position-information input[type="text"], .content-position-information textarea, .content-position-information select {
+    width: 50%;
+    display: inline-block;
+}
+
+.content-position-information textarea {
+    height: 130px;
+
 }
 
 .content-position-information dl {
