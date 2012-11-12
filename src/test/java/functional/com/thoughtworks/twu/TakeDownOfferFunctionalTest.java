@@ -103,10 +103,10 @@ public class TakeDownOfferFunctionalTest {
     private WebElement findElementById(String id) {
         try {
             return webDriver.findElement(By.id(id));
-        } catch (NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoSuchElementException e) {
             String pageSource = webDriver.getPageSource();
             try {
-                FileUtils.writeStringToFile(new File("build/lastPage.html"), pageSource);
+                FileUtils.writeStringToFile(new File("build/test-results/lastPage.html"), pageSource);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
