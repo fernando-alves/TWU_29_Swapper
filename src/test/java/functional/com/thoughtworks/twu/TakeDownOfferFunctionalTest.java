@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.BAD_CONTEXT;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.File;
 import java.io.IOException;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -94,11 +96,11 @@ public class TakeDownOfferFunctionalTest {
 
         webDriver.findElement(By.id("browse")).click();
 
-        WebElement offer = findElementById("offer1");
+        List<WebElement> offerList = webDriver.findElements(By.id("offer1"));
 
-        assertThat(offer.getText(), is(not((offerTitle))));
-
+        assertThat(offerList.size(), is(0));
     }
+
 
     private WebElement findElementById(String id) {
         try {
