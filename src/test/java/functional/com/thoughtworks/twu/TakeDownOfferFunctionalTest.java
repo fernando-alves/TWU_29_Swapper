@@ -41,6 +41,7 @@ public class TakeDownOfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
 
         String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
         webDriver.findElement(By.name("title")).sendKeys(offerTitle);
@@ -55,6 +56,7 @@ public class TakeDownOfferFunctionalTest {
 
 
         webDriver.findElement(By.id("takeDownButton")).click();
+        Thread.sleep(2000);
 
         String pageTitle = webDriver.getTitle();
 
@@ -73,6 +75,7 @@ public class TakeDownOfferFunctionalTest {
         WebDriverWait waitToBrowse = new WebDriverWait(webDriver, 1000);
         waitToBrowse.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
         webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(1000);
         List<WebElement> initialList = webDriver.findElements(By.className("offer"));
         webDriver.get("http://127.0.0.1:8080/twu/");
 
@@ -133,12 +136,13 @@ public class TakeDownOfferFunctionalTest {
         webDriver.close();
     }
 
-    private void logIn() {
+    private void logIn() throws InterruptedException {
         webDriver.get("http://127.0.0.1:8080/twu/");
 
         webDriver.findElement(By.id("username")).sendKeys(username);
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(2000);
     }
 
 }

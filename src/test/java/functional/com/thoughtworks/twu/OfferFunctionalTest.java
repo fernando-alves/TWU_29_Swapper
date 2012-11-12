@@ -31,7 +31,7 @@ public class OfferFunctionalTest {
     }
 
     @Test
-    public void shouldCheckExistenceOfCreateOfferLink() {
+    public void shouldCheckExistenceOfCreateOfferLink() throws InterruptedException {
         logIn();
 
         WebElement clickButton = webDriver.findElement(By.id("createOffer"));
@@ -44,6 +44,7 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
         String actualTitleText = getTitleTagFromPage();
 
         String expectedTitle = "Create Offer";
@@ -57,7 +58,7 @@ public class OfferFunctionalTest {
     }
 
     @Test
-    public void shouldHaveAnElementToEnterTitle() {
+    public void shouldHaveAnElementToEnterTitle() throws InterruptedException {
         logIn();
 
         webDriver.findElement(By.id("createOffer")).click();
@@ -97,6 +98,7 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
 
         webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
 
@@ -119,6 +121,7 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
         webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
 
         Select select = new Select(webDriver.findElement(By.tagName("select")));
@@ -137,10 +140,12 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
 
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
         String firstOfferTitle = firstOffer.getText();
         firstOffer.click();
+        Thread.sleep(2000);
 
         assertThat(webDriver.getPageSource().contains(firstOfferTitle),is(true));
 
@@ -152,6 +157,7 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
 
         webDriver.findElement(By.id("offer1")).click();
         Thread.sleep(2000);
@@ -163,7 +169,7 @@ public class OfferFunctionalTest {
     }
 
     @Test
-    public void shouldCheckExistenceOfBrowseOfferLink() {
+    public void shouldCheckExistenceOfBrowseOfferLink() throws InterruptedException {
         logIn();
 
         WebElement clickButton = webDriver.findElement(By.id("browse"));
@@ -178,6 +184,7 @@ public class OfferFunctionalTest {
 
         Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
         webDriver.findElement(By.name("title")).sendKeys(testTitle);
 
         Select select = new Select(webDriver.findElement(By.tagName("select")));
@@ -190,6 +197,7 @@ public class OfferFunctionalTest {
 
         webDriver.get("http://127.0.0.1:8080/twu/");
         webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
 
         assertThat(firstOffer.getText(),is(testTitle));
@@ -200,11 +208,12 @@ public class OfferFunctionalTest {
         webDriver.close();
     }
 
-    private void logIn() {
+    private void logIn() throws InterruptedException {
         webDriver.get("http://127.0.0.1:8080/twu/");
 
         webDriver.findElement(By.id("username")).sendKeys(username);
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(2000);
     }
 }
