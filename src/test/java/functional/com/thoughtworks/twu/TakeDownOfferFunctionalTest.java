@@ -68,8 +68,10 @@ public class TakeDownOfferFunctionalTest {
     public void shouldNotDisplayHiddenOfferInBrowsePageAfterTakeDown() throws Exception {
         logIn();
 
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
 
+        WebDriverWait waitToBrowse = new WebDriverWait(webDriver, 1000);
+        waitToBrowse.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
         webDriver.findElement(By.id("browse")).click();
         List<WebElement> initialList = webDriver.findElements(By.className("offer"));
         webDriver.get("http://127.0.0.1:8080/twu/");
