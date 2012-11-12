@@ -9,7 +9,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.GregorianCalendar;
 
@@ -69,6 +71,9 @@ public class TakeDownOfferFunctionalTest {
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
 
+        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
         String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
         webDriver.findElement(By.name("title")).sendKeys(offerTitle);
 
@@ -77,7 +82,8 @@ public class TakeDownOfferFunctionalTest {
 
         webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("takeDownButton")));
 
 
 
@@ -90,6 +96,7 @@ public class TakeDownOfferFunctionalTest {
         assertThat(offer.getText(), is(not((offerTitle))));
 
     }
+
 
     private void loginUser2() {
 

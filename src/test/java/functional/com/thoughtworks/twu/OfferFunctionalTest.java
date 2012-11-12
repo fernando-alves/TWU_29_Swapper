@@ -7,7 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Date;
 
@@ -66,10 +69,14 @@ public class OfferFunctionalTest {
     }
 
     @Test
-    public void shouldHaveAnElementToSelectCategory() {
+    public void shouldHaveAnElementToSelectCategory() throws InterruptedException {
         logIn();
 
         webDriver.findElement(By.id("createOffer")).click();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("category")));
+
         WebElement categoryList = webDriver.findElement(By.name("category"));
 
         assertThat(categoryList.isDisplayed(), is(true));
