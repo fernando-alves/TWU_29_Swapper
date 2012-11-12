@@ -1,11 +1,9 @@
 package functional.com.thoughtworks.twu;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.BAD_CONTEXT;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 public class TakeDownOfferFunctionalTest {
@@ -76,7 +71,7 @@ public class TakeDownOfferFunctionalTest {
         Thread.sleep(1000);
 
         webDriver.findElement(By.id("browse")).click();
-        List<WebElement> initialList = webDriver.findElements(By.tagName("li"));
+        List<WebElement> initialList = webDriver.findElements(By.className("offer"));
         webDriver.get("http://127.0.0.1:8080/twu/");
 
 
@@ -94,17 +89,13 @@ public class TakeDownOfferFunctionalTest {
         webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
 
-
-
-
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("takeDownButton")));
-
-
 
         webDriver.findElement(By.id("takeDownButton")).click();
         webDriver.findElement(By.id("browse")).click();
 
-        List<WebElement> offerList = webDriver.findElements(By.id("offer1"));
+        List<WebElement> offerList = webDriver.findElements(By.className("offer"));
+
         assertThat(offerList.size(), is(initialList.size()));
     }
 
