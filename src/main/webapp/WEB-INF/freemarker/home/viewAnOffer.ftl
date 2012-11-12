@@ -52,23 +52,7 @@
 <div class="main-container">
     <div id="sidebar-left">
     </div>
-<<<<<<< HEAD
-=======
-    <div>
-        <table>
-            Title : ${theOffer.title} <br/>
-            Category : ${theOffer.category} <br/>
-            Description : ${theOffer.description} <br/>
-            Contact offer owner : ${theOffer.owner}@thoughtworks.com</br>
-        </table>
-        <form name="user" action="/twu/offer/takedown" method="get">
-            <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
-            <#if "${username}" == "${theOffer.owner}"><input id="takeDownButton" type="submit" value="   Take Down   " name="submit" />
-            </#if>
 
-        </form>
-    </div>
->>>>>>> adding functional test, still need one more
     <div id="sidebar-right">
     </div>
     <div class="display-an-offer">
@@ -87,7 +71,7 @@
         <div>
             <form name="user" action="/twu/offer/takedown" method="get">
                 <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
-                <input class="btn btn-primary" id="takeDownButton" type="submit" value="   Take Down   " name="submit"/>
+                <#if "${username}" == "${theOffer.owner}"><input class="btn btn-primary" id="takeDownButton" type="submit" value="   Take Down   " name="submit"/></#if>
             </form>
         </div>
     </div>
