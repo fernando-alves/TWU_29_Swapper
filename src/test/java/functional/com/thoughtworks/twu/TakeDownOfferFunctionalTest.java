@@ -74,6 +74,12 @@ public class TakeDownOfferFunctionalTest {
         logIn();
 
         Thread.sleep(1000);
+
+        webDriver.findElement(By.id("browse")).click();
+        List<WebElement> initialList = webDriver.findElements(By.tagName("li"));
+        webDriver.get("http://127.0.0.1:8080/twu/");
+
+
         webDriver.findElement(By.id("createOffer")).click();
 
         WebDriverWait wait = new WebDriverWait(webDriver, 5000);
@@ -88,17 +94,18 @@ public class TakeDownOfferFunctionalTest {
         webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
 
+
+
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("takeDownButton")));
 
 
 
         webDriver.findElement(By.id("takeDownButton")).click();
-
         webDriver.findElement(By.id("browse")).click();
 
         List<WebElement> offerList = webDriver.findElements(By.id("offer1"));
-
-        assertThat(offerList.size(), is(0));
+        assertThat(offerList.size(), is(initialList.size()));
     }
 
 
