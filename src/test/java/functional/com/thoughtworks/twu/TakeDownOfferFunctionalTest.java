@@ -39,7 +39,7 @@ public class TakeDownOfferFunctionalTest {
 
         logIn();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
 
         String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
@@ -48,9 +48,9 @@ public class TakeDownOfferFunctionalTest {
         Select select = new Select(webDriver.findElement(By.tagName("select")));
         select.selectByValue("Cars");
 
-        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
 
 
@@ -68,7 +68,7 @@ public class TakeDownOfferFunctionalTest {
     public void shouldNotDisplayHiddenOfferInBrowsePageAfterTakeDown() throws Exception {
         logIn();
 
-//        Thread.sleep(1000);
+//        Thread.sleep(2000);
 
         WebDriverWait waitToBrowse = new WebDriverWait(webDriver, 1000);
         waitToBrowse.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
@@ -88,7 +88,7 @@ public class TakeDownOfferFunctionalTest {
         Select select = new Select(webDriver.findElement(By.tagName("select")));
         select.selectByValue("Cars");
 
-        webDriver.findElement(By.name("description")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("takeDownButton")));

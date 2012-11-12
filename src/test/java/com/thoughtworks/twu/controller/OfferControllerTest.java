@@ -170,7 +170,7 @@ public class OfferControllerTest {
         MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.setSession(session1);
 
-        offerController.createOffer(title, category, description, request1, creationTime,hidden);
+        offerController.createOffer(title, category, description, request1);
 
     }
 
@@ -180,7 +180,7 @@ public class OfferControllerTest {
         MockHttpServletRequest request1 = new MockHttpServletRequest();
         request1.setSession(session1);
 
-        offerController.createOffer(title, category, description, request1, creationTime,hidden);
+        offerController.createOffer(title, category, description, request1);
 
     }
 

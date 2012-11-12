@@ -54,7 +54,7 @@
     </div>
     <div class="content-position">
         <div class="content-position-information">
-     <form name="user" action="/twu/offer/createAnOffer" method="post">
+     <form name="user" action="createAnOffer" method="post">
          <dl>
          <dt>Title:</dt>
          <dd>
@@ -67,11 +67,11 @@
                     <option value="Housing">Housing</option>
                     <option value="Miscellaneous">Miscellaneous</option>
                     <option value="Services">Services</option>
-                </select><br></dd>
+                </select><br/></dd>
 
          <dt>Description:</dt>
-             <dd> <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br></dd></dl>
-         <input class="btn btn-primary"  type="submit" value="   save   " name="submit">
+             <dd> <textarea rows="4" cols="50" name="descriptionTxt" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br/></dd></dl>
+         <input class="btn btn-primary"  type="submit" value="   save   " name="submit" />
             </form>
         </fieldset>
     </div>

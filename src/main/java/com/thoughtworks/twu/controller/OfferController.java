@@ -44,7 +44,7 @@ public class OfferController {
 
     @RequestMapping(value = "/createAnOffer", method = RequestMethod.POST)
     public View createOffer(@RequestParam("title") String title, @RequestParam("category") String category,
-                            @RequestParam("description") String description, HttpServletRequest request, Date creationTime, boolean hidden) {
+                            @RequestParam("descriptionTxt") String description, HttpServletRequest request) {
         this.title = title;
         this.category = category;
         this.description = description;
