@@ -23,17 +23,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">FeedMyCat</a>
+            <a class="brand">FeedMyCat</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">Create Offer</a></li>
-                    <li><a href="#contact">Browse Offer</a></li>
-                    <li><a href="#contact">About</a></li>
+                    <li class="active"><a href="/twu/home">Home</a></li>
+                    <li><a href="create">Create Offer</a></li>
+                    <li><a href="browse">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#">Welcome, ${username}</a></li>
+                    <li><a>Welcome, ${username}</a></li>
                 </ul>
             </div>
         </div>
@@ -60,6 +59,9 @@
             <dl>
                 <dt>Title:</dt>
                 <dd>${theOffer.title}</dd>
+
+                <dt>Category:</dt>
+                <dd>${theOffer.category}</dd>
 
                 <dt>Description:</dt>
                 <dd>${theOffer.description}</dd>

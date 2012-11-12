@@ -4,7 +4,7 @@ body {
     color: #5a5a5a;
 }
 
-.header{
+.header {
     border-bottom: solid 10px #000;
 }
 .header-image {
@@ -28,7 +28,7 @@ body {
 .content-position dd {
     width: 75%;
     word-break: break-all;
-    word-wrap:break-word;
+    word-wrap: break-word;
     overflow: hidden;
     border-bottom: solid #999 3px;
     padding: 12px 0 7px 0;
@@ -103,6 +103,7 @@ footer {
     font-size: 16px;
     font-weight: bold;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+    color: #ffffff;
 }
 
 /* Navbar links: increase padding for taller navbar */

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
     public String goToHomepage(HttpServletRequest request, HttpSession session) {
         session.setAttribute("username", request.getRemoteUser());
         return "home/home";

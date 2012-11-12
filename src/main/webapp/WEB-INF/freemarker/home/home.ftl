@@ -24,7 +24,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">FeedMyCat</a>
+            <a class="brand">FeedMyCat</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">

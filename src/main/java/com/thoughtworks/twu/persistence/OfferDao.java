@@ -32,10 +32,8 @@ public class OfferDao {
     }
 
     public void takeDown(String offerId) {
-
         Offer offer = getOfferById(offerId);
         offer.setHidden(true);
         saveOffer(offer);
-
     }
 }
