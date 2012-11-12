@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Add An Offer</title>
+    <title>Browse Offers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="#">FeedMyCat</a>
+            <a class="brand" href="/twu">FeedMyCat</a>
 
             <div class="nav-collapse collapse">
                 <ul class="nav">
@@ -32,7 +32,7 @@
                     <li  class="active"><a href="#">Browse Offers</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#">Welcome, ${username}</a></li>
+                    <li><a href="/twu">Welcome, ${username}</a></li>
                 </ul>
             </div>
         </div>
@@ -53,6 +53,7 @@
     </div>
     <div class="content-position">
         <div class="content-position-information">
+            <h1>Browse Offers</h1>
             <ol>
                 <#assign i=0>
                 <#list allOffers as offer>
