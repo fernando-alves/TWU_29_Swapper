@@ -86,9 +86,9 @@ public class OfferFunctionalTest {
     @Test
     public void shouldHaveAnElementToEnterDescription() throws InterruptedException {
         logIn();
-
+        Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         WebElement titleTextBox = webDriver.findElement(By.name("descriptionTxt"));
 
         assertThat(titleTextBox.isDisplayed(), is(true));
