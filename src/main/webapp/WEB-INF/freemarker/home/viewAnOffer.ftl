@@ -76,7 +76,8 @@
                     <input type="submit" class="btn btn-primary" value="  Contact  "/>
                 <br/>
                 </#if>
-                    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
+                    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.<br/>
+                    Please ensure that the emails from this id don't end up in the spam folder.
                 </form>
             </div>
         </div>
