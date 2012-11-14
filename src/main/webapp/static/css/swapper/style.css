@@ -1,0 +1,8 @@
+.display-offer {
+    width: 75%;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: hidden;
+    padding: 12px 0 7px 0;
+    margin-bottom: 15px;
+}

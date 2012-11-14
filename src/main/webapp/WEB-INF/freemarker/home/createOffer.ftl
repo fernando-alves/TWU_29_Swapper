@@ -8,6 +8,7 @@
 
     <link href="../../../twu/static/css/bootstrap.css" rel="stylesheet">
     <link href="../../../twu/static/css/swapper/swapper.css" rel="stylesheet">
+    <link href="../../../twu/static/css/swapper/style.css" rel="stylesheet">
     <link href="../../../twu/static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

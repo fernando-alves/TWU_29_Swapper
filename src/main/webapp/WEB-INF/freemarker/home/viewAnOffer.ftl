@@ -8,6 +8,7 @@
 
     <link href="../../../twu/static/css/bootstrap.css" rel="stylesheet">
     <link href="../../../twu/static/css/swapper/swapper.css" rel="stylesheet">
+    <link href="../../../twu/static/css/swapper/style.css" rel="stylesheet">
     <link href="../../../twu/static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -54,18 +55,18 @@
 
     <div id="sidebar-right">
     </div>
+
     <div class="content-position">
         <div class="content-position-information">
 
-        <h1>${theOffer.title}</h1>
+        <div class="display-offer"><h1>${theOffer.title}</h1></div>
         <span class="label label-info">${theOffer.category}</span>
-        <p>${theOffer.description}</p>
+        <div class="display-offer">${theOffer.description}</div>
         <div>
             <form name="user" action="/twu/offer/takedown" method="get">
                 <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
             <#if "${username}" == "${theOffer.owner}"><input class="btn btn-primary" id="takeDownButton" type="submit"
                                                              value="   Take Down   " name="submit"/>            </#if>
-
             </form>
 
             <form action="https://mail.google.com/mail/?view=cm&fs=1&to=${theOffer.owner}@thoughtworks.com&su=I'm%20interested%20in%20your%20offer&body=I'd%20like%20to%20approach%20you%20regarding%20the%20details%20of%20your%20offer."
