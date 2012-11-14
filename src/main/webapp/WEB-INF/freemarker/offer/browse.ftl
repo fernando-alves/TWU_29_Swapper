@@ -18,21 +18,17 @@
 
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="/twu">FeedMyCat</a>
+            <a class="brand">FeedMyCat</a>
 
-            <div class="nav-collapse collapse">
+            <div>
                 <ul class="nav">
-                    <li><a href="/twu">Home</a></li>
-                    <li><a href="/twu/offer/create">Create Offer</a></li>
-                    <li  class="active"><a href="#">Browse Offers</a></li>
+                    <li><a href="/twu/home">Home</a></li>
+                    <li><a href="create">Create Offer</a></li>
+                    <li class="active"><a href="browse">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="/twu">Welcome, ${username}</a></li>
+                    <li><a id="username">Welcome, ${username}</a></li>
+
                 </ul>
             </div>
         </div>
@@ -62,7 +58,8 @@
             </ol>
         </div>
     </div>
-
+    <br/>
+    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
 </div>
 <div style="clear:both"></div>
 <footer>

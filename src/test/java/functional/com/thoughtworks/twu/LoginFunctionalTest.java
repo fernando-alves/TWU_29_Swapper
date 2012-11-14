@@ -62,7 +62,7 @@ public class LoginFunctionalTest {
     }
 
     @Test
-    public void shouldBeAbleToPerformSSO() {
+    public void shouldBeAbleToPerformSSO() throws InterruptedException {
         webDriver.get("http://castest.thoughtworks.com");
         String username = "test.twu";
         String password = "Th0ughtW0rks@12";
@@ -70,8 +70,10 @@ public class LoginFunctionalTest {
         webDriver.findElement(By.id("username")).sendKeys(username);
         webDriver.findElement(By.id("password")).sendKeys(password);
         webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(2000);
         webDriver.get("http://127.0.0.1:8080/twu/");
 
+        Thread.sleep(2000);
         WebElement userNameOnShowPage = webDriver.findElement(By.id("username"));
         assertThat(userNameOnShowPage.getText().contains(username), is(true));
 

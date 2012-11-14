@@ -19,26 +19,22 @@
 
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
             <a class="brand">FeedMyCat</a>
 
-            <div class="nav-collapse collapse">
+            <div>
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/twu/home">Home</a></li>
                     <li><a href="offer/create">Create Offer</a></li>
                     <li><a href="offer/browse">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#" id="username">Welcome, ${username}</a></li>
+                    <li><a id="username">Welcome, ${username}</a></li>
+
                 </ul>
             </div>
-
         </div>
     </div>
+
 </div>
 
 <div id="myCarousel" class="carousel slide">

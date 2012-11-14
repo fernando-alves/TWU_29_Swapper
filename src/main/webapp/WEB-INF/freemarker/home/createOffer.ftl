@@ -22,28 +22,24 @@
 
     <div class="navbar navbar-inverse">
         <div class="navbar-inner">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="#">FeedMyCat</a>
+            <a class="brand">FeedMyCat</a>
 
-            <div class="nav-collapse collapse">
+            <div>
                 <ul class="nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">Create Offer</a></li>
-                    <li><a href="#contact">Browse Offer</a></li>
-                    <li><a href="#contact">About</a></li>
+                    <li><a href="/twu/home">Home</a></li>
+                    <li class="active"><a href="create">Create Offer</a></li>
+                    <li><a href="browse">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
-                    <li><a href="#">Welcome, ${username}</a></li>
+                    <li><a id="username">Welcome, ${username}</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
 </div>
+</div>
+
 <div id="myCarousel">
     <div class="carousel-inner header">
         <div class="active pos-1 header-image">
@@ -59,25 +55,32 @@
     <div class="content-position">
         <div class="content-position-information">
             <h1>Create Offer</h1>
-     <form name="user" action="createAnOffer" method="post" onsubmit="return validateWhenClick()">
-         <p>
-        <input class="input-block-level" type="text" name="title" maxlength="100" placeholder="Title">
-       </p>
-         <p>
-         <select name="category" id="selectCategory">
-                    <option value="Books">Select a category</option>
-                    <option value="Books">Books</option>
-                    <option value="Cars">Cars</option>
-                    <option value="Housing">Housing</option>
-                    <option value="Miscellaneous">Miscellaneous</option>
-                    <option value="Services">Services</option>
-                </select>
-</p>
-         <p>
-           <textarea rows="4" cols="50" name="descriptionTxt" placeholder="Description" maxlength="1000"></textarea>
-         </p><input class="btn btn-primary"  type="submit" value="   save   " name="submit" />
+
+            <form name="user" action="createAnOffer" method="post">
+                <p>
+                    <input class="input-block-level" type="text" name="title" maxlength="100" placeholder="Title">
+                </p>
+
+                <p>
+                    <select name="category" id="selectCategory">
+                        <option value="Books">Select a category</option>
+                        <option value="Books">Books</option>
+                        <option value="Cars">Cars</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Miscellaneous">Miscellaneous</option>
+                        <option value="Services">Services</option>
+                    </select>
+                </p>
+                <p>
+                    <textarea rows="4" cols="50" name="descriptionTxt" placeholder="Description"
+                              maxlength="1000"></textarea>
+                </p><input class="btn btn-primary" type="submit" value="   Save   " name="submit"/>
+                <br/>
+                <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
             </form>
-        </fieldset>
+            </fieldset>
+        </div>
+
     </div>
 
 </div>
