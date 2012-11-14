@@ -31,6 +31,12 @@ public class OfferFunctionalTest {
         password = "Th0ughtW0rks@12";
     }
 
+    private String getTitleTagFromPage() {
+        WebElement actualTitle = webDriver.findElement(By.tagName("title"));
+        return actualTitle.getText();
+    }
+
+
     @Test
     public void shouldCheckExistenceOfCreateOfferLink() throws InterruptedException {
         logIn();
@@ -51,12 +57,6 @@ public class OfferFunctionalTest {
         String expectedTitle = "Create Offer";
         assertThat(actualTitleText, is(expectedTitle));
 
-    }
-
-
-    private String getTitleTagFromPage() {
-        WebElement actualTitle = webDriver.findElement(By.tagName("title"));
-        return actualTitle.getText();
     }
 
     @Test

@@ -168,32 +168,6 @@ public class TakeDownOfferFunctionalTest {
     }
 
 
-    private WebElement findElementById(String id) {
-        try {
-            return webDriver.findElement(By.id(id));
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            String pageSource = webDriver.getPageSource();
-            try {
-                FileUtils.writeStringToFile(new File("build/test-results/lastPage.html"), pageSource);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            throw e;
-        }
-    }
-
-
-    private void loginUser2() {
-
-        webDriver.get("http://127.0.0.1:8080/twu/");
-
-        webDriver.findElement(By.id("username")).sendKeys();
-
-        webDriver.findElement(By.id("password")).sendKeys();
-        webDriver.findElement(By.name("submit")).click();
-
-    }
-
     @After
     public void tearDown() throws Exception {
         webDriver.close();
