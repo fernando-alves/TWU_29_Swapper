@@ -41,6 +41,7 @@ public class ValidationTest {
         logIn();
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(1000);
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(1000);
 
@@ -57,6 +58,7 @@ public class ValidationTest {
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
 
+        Thread.sleep(1000);
         webDriver.findElement(By.name("title")).sendKeys("   ");
         webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid Description");
 
@@ -75,6 +77,7 @@ public class ValidationTest {
         logIn();
         Thread.sleep(1000);
         webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(1000);
 
         webDriver.findElement(By.name("title")).sendKeys("Valid title");
         webDriver.findElement(By.name("descriptionTxt")).sendKeys("       ");
