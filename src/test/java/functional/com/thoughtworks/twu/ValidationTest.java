@@ -39,11 +39,11 @@ public class ValidationTest {
     @Test(expected = UnhandledAlertException.class)
     public void shouldNotCreateOfferWithEmptyFields() throws InterruptedException {
         logIn();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         String actualTitle = getTitleTagFromPage();
         String expectedTitle = "Create Offer";
