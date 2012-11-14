@@ -26,7 +26,7 @@ public class OfferDao {
     }
 
     public List<Offer> getAll() {
-        Query query = sessionFactory.getCurrentSession().createQuery("from Offer where Hidden = 'false'");
+        Query query = sessionFactory.getCurrentSession().createQuery("from Offer where Hidden = 'false' order by CreationTime");
 
         return (List<Offer>) query.list();
     }

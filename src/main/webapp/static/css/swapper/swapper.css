@@ -54,6 +54,9 @@ body {
     height: 130px;
 
 }
+.content-position-information ol {
+    padding-top: 30px;
+}
 
 .content-position-information dl {
     margin-top: 0px;
