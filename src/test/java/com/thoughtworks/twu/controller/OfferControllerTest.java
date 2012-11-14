@@ -1,6 +1,8 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Offer;
+import com.thoughtworks.twu.service.MailService;
+import com.thoughtworks.twu.service.MailServiceInterface;
 import com.thoughtworks.twu.service.OfferService;
 import com.thoughtworks.twu.service.OfferServiceInterface;
 import org.junit.Before;
@@ -33,6 +35,7 @@ public class OfferControllerTest {
     OfferServiceInterface offerServiceInterface;
 
     private OfferServiceInterface mockOfferService;
+    private MailServiceInterface mockMailService;
     private OfferController offerController;
     private String title;
     private String category;
@@ -47,7 +50,8 @@ public class OfferControllerTest {
     @Before
     public void setUp() {
         mockOfferService = mock(OfferService.class);
-        offerController = new OfferController(mockOfferService);
+        mockMailService = mock(MailService.class);
+        offerController = new OfferController(mockOfferService,mockMailService);
         title = "this is a title";
         category = "Cars";
         description = "there is some descriptions";
@@ -122,7 +126,8 @@ public class OfferControllerTest {
     @Test
     public void shouldCallOfferServiceForBrowseViewPage() throws Exception {
         OfferService offerService = mock(OfferService.class);
-        OfferController offerController = new OfferController(offerService);
+        MailService mailService = mock(MailService.class);
+        OfferController offerController = new OfferController(offerService, mailService);
 
         List<Offer> expectedOffers = new ArrayList<Offer>();
 

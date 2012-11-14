@@ -41,7 +41,9 @@ dependencies {
 
             'mysql:mysql-connector-java:5.1.21',
 
-            'com.dbdeploy:dbdeploy-ant:3.0M3'
+            'com.dbdeploy:dbdeploy-ant:3.0M3',
+            'javax.mail:mail:1.4.5'
+
 
     runtime 'cglib:cglib-nodep:2.2'
 

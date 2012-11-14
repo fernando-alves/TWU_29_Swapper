@@ -70,16 +70,15 @@
 
                 </form>
 
-                <form action="https://mail.google.com/mail/?view=cm&fs=1&to=${theOffer.owner}@thoughtworks.com&su=I'm%20interested%20in%20your%20offer&body=I'd%20like%20to%20approach%20you%20regarding%20the%20details%20of%20your%20offer."
-                      method="post">
-                <#if "${username}"  != "${theOffer.owner}" >
-                    <input type="submit" class="btn btn-primary" value="  Contact  "/>
-                <br/>
-                </#if>
-                    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.<br/>
-                    Please ensure that the emails from this id don't end up in the spam folder.
-                </form>
-            </div>
+            <form action="/twu/offer/contact"
+                  method="post">
+                <input type="hidden" name="offerId" id="offerId" value="${theOffer.id}">
+            <#if "${username}"  != "${theOffer.owner}" >
+
+                <input type="submit" class="btn btn-primary" value="  Contact  "/>
+            </#if>
+            </form>
+        </div>
         </div>
     </div>
     <div style="clear:both"></div>

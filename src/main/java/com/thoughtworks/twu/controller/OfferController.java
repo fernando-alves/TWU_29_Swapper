@@ -1,6 +1,7 @@
 package com.thoughtworks.twu.controller;
 
 import com.thoughtworks.twu.domain.Offer;
+import com.thoughtworks.twu.service.MailServiceInterface;
 import com.thoughtworks.twu.service.OfferServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,13 +29,17 @@ public class OfferController {
     @Autowired
     private OfferServiceInterface offerService;
 
+    @Autowired
+    private MailServiceInterface mailService;
+
     private String id;
 
     public OfferController() {
     }
 
-    public OfferController(OfferServiceInterface offerService) {
+    public OfferController(OfferServiceInterface offerService, MailServiceInterface mailService) {
         this.offerService = offerService;
+        this.mailService = mailService;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -67,6 +72,15 @@ public class OfferController {
         redirectView.setExposeModelAttributes(false);
 
         return redirectView;
+    }
+
+    @RequestMapping(value = "/contact", method = RequestMethod.POST)
+    public String contact(ModelMap modelMap, @RequestParam("offerId") String offerId,HttpServletRequest request) {
+        String from = request.getSession().getAttribute("username").toString();
+        Offer offer = offerService.getOfferById(offerId);
+        mailService.send(offer.getOwner(), from, offer.getTitle());
+        modelMap.addAttribute("theOffer", offer);
+        return "home/viewAnOffer";
     }
 
     @RequestMapping("viewAnOfferAfterCreating")
