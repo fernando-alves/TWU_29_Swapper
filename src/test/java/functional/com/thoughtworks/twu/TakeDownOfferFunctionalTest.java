@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -32,6 +34,68 @@ public class TakeDownOfferFunctionalTest {
         webDriver = new FirefoxDriver();
         username = "test.twu";
         password = "Th0ughtW0rks@12";
+    }
+
+    @Test
+    public void shouldBeAbleToTakedownOfferAfterCreate() throws Exception {
+
+        logIn();
+
+        Thread.sleep(2000);
+        webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
+
+        String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
+        webDriver.findElement(By.name("title")).sendKeys(offerTitle);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(2000);
+
+
+        WebElement takeDownButton = webDriver.findElement(By.id("takeDownButton"));
+
+        assertThat(takeDownButton, is(not(nullValue())));
+
+    }
+
+    @Test
+    public void shouldBeAbleToTakedownOfferAfterBrowse() throws Exception {
+
+        logIn();
+
+        Thread.sleep(2000);
+        webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
+
+        String offerTitle = "TITLE_"+ GregorianCalendar.getInstance().getTime().getTime();
+        webDriver.findElement(By.name("title")).sendKeys(offerTitle);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(2000);
+
+
+        webDriver.get("http://127.0.0.1:8080/twu/");
+
+        webDriver.findElement(By.id("browse")).click();
+
+        Thread.sleep(2000);
+
+        webDriver.findElement(By.id("offer1")).click();
+
+        Thread.sleep(2000);
+
+        WebElement takeDownButton = webDriver.findElement(By.id("takeDownButton"));
+
+        assertThat(takeDownButton, is(not(nullValue())));
+
     }
 
     @Test
@@ -54,7 +118,6 @@ public class TakeDownOfferFunctionalTest {
         Thread.sleep(2000);
 
 
-
         webDriver.findElement(By.id("takeDownButton")).click();
         Thread.sleep(2000);
 
@@ -66,11 +129,11 @@ public class TakeDownOfferFunctionalTest {
 
     }
 
+
+
     @Test
     public void shouldNotDisplayHiddenOfferInBrowsePageAfterTakeDown() throws Exception {
         logIn();
-
-//        Thread.sleep(2000);
 
         WebDriverWait waitToBrowse = new WebDriverWait(webDriver, 1000);
         waitToBrowse.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
