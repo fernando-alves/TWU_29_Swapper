@@ -1,46 +1,58 @@
-//function validateTitle(){
-//    var actualTitle=document.forms["user"]["title"].value;
-//    if (actualTitle == null) {
-//        alert("Title can not be empty")
-//        return false;
-//    }
-//    actualTitle = actualTitle.trim
-//
-//    if (actualTitle.length <=0)
-//    {
-//        alert("Title cannot be blank");
-//        return false;
-//    }
-//}
-//
-//function validateDescription(){
-//    var actualTitle = document.forms["user"]["description"].value;
-//    if (actualTitle == null || actualTitle == "") {
-//        alert("description can not be empty");
-//        return false;
-//    }
-//    actualTitle = actualTitle.trim;
-//
-//    if (actualTitle.length <=0)
-//    {
-//        alert("description can not be blank");
-//        return false;
-//    }
-//}
-//
-//function validateOffer(){
-//    alert(" asdadasd");
-//    validateTitle();
-//    validateDescription();
-//}
-//
-$('document').ready(function(){
-    $('#submit_form').click(function(){
+function validateTitle() {
+    var actualTitle = document.forms["user"]["title"].value;
 
-    //validateOffer();
-    console.log("hi");
+    if (actualTitle === "") {
+        alert("Title can not be empty");
+        return true;
+    }
+
+    actualTitle = trim(actualTitle);
+
+    if (actualTitle.length === 0) {
+        alert("Title cannot be blank");
+        return true;
+    }
+}
+
+function validateDescription() {
+
+    var actualDescription = document.forms["user"]["descriptionTxt"].value;
+
+    if (actualDescription === "") {
         alert("description can not be empty");
-    })
+        return true;
+    }
+    actualDescription = trim(actualDescription);
 
+    if (actualDescription.length === 0) {
+        alert("description can not be blank");
+        return true;
+    }
+}
+
+function validateSelectList() {
+    var selectedItem = $("#selectCategory").find(":selected").text();
+
+    if(selectedItem === "Select a category") {
+        alert("Please select a category");
+        return true;
+    }
+}
+
+function trim(str) {
+    return str.replace(/^\s+|\s+$/g, "");
+}
+
+function validateWhenClick() {
+    $('[name="submit"]').click(function () {
+        if (!validateTitle() && !validateDescription() && !validateSelectList()) {
+            return true;
+        }
+        return false;
+    });
+}
+
+$('document').ready(function () {
+    validateWhenClick();
 });
 

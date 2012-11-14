@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -39,41 +40,6 @@ public class OfferFunctionalTest {
     }
 
     @Test
-    public void shouldNotCreateOfferWithEmptyFields() throws InterruptedException {
-        logIn();
-        Thread.sleep(1000);
-        webDriver.findElement(By.id("createOffer")).click();
-        webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
-
-        String actualTitle = getTitleTagFromPage();
-        String expectedTitle = "Create Offer";
-
-        assertThat(actualTitle, is(expectedTitle));
-
-    }
-
-    @Test
-    public void shouldNotCreateOfferWithBlankTitleFields() throws InterruptedException {
-        logIn();
-        Thread.sleep(1000);
-        webDriver.findElement(By.id("createOffer")).click();
-
-        webDriver.findElement(By.name("title")).sendKeys("   ");
-        webDriver.findElement(By.name("description")).sendKeys("Valid Description");
-
-
-        webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(1000);
-
-        String actualTitle = getTitleTagFromPage();
-        String expectedTitle = "Create Offer";
-
-        assertThat(actualTitle, is(expectedTitle));
-
-    }
-
-    @Test
     public void shouldGoToCreateOfferPage() throws InterruptedException {
         logIn();
 
@@ -86,6 +52,7 @@ public class OfferFunctionalTest {
         assertThat(actualTitleText, is(expectedTitle));
 
     }
+
 
     private String getTitleTagFromPage() {
         WebElement actualTitle = webDriver.findElement(By.tagName("title"));
@@ -166,11 +133,11 @@ public class OfferFunctionalTest {
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(2000);
         String offerOwnerEmail = username + "@thoughtworks.com";
-        assertThat(webDriver.getPageSource().contains(offerOwnerEmail),is(true));
+        assertThat(webDriver.getPageSource().contains(offerOwnerEmail), is(true));
     }
 
     @Test
-    public void shouldDisplayRequiredOfferDetails() throws InterruptedException{
+    public void shouldDisplayRequiredOfferDetails() throws InterruptedException {
         logIn();
 
         Thread.sleep(2000);
@@ -182,7 +149,7 @@ public class OfferFunctionalTest {
         firstOffer.click();
         Thread.sleep(2000);
 
-        assertThat(webDriver.getPageSource().contains(firstOfferTitle),is(true));
+        assertThat(webDriver.getPageSource().contains(firstOfferTitle), is(true));
 
     }
 
@@ -227,25 +194,128 @@ public class OfferFunctionalTest {
 
         webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
         webDriver.findElement(By.name("submit")).click();
-<<<<<<< HEAD
+
         Thread.sleep(2000);
-=======
-
-      //  Thread.sleep(1000);
->>>>>>> fad8fee... rebasing
-
 
         webDriver.get("http://127.0.0.1:8080/twu/");
         webDriver.findElement(By.id("browse")).click();
-<<<<<<< HEAD
         Thread.sleep(2000);
-=======
         WebDriverWait wait = new WebDriverWait(webDriver, 5000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
->>>>>>> fad8fee... rebasing
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
 
-        assertThat(firstOffer.getText(),is(testTitle));
+        assertThat(firstOffer.getText(), is(testTitle));
+    }
+
+    //QAs can copy these
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithEmptyFields() throws InterruptedException {
+        logIn();
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithBlankTitleFields() throws InterruptedException {
+        logIn();
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+
+        webDriver.findElement(By.name("title")).sendKeys("   ");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid Description");
+
+
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithBlankDescriptionFields() throws InterruptedException {
+        logIn();
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+
+        webDriver.findElement(By.name("title")).sendKeys("Valid title");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("       ");
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithNoCategorySelect() throws InterruptedException {
+        logIn();
+        Date uniqueDate = new Date();
+        String testTitle = uniqueDate.toString();
+
+        Thread.sleep(2000);
+        webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
+        webDriver.findElement(By.name("title")).sendKeys(testTitle);
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+
+        Thread.sleep(2000);
+
+        webDriver.get("http://127.0.0.1:8080/twu/");
+        webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
+        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
+
+        assertThat(firstOffer.getText(), is(testTitle));
+    }
+
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithEmptyDescription() throws InterruptedException {
+        logIn();
+        Date uniqueDate = new Date();
+        String testTitle = uniqueDate.toString();
+
+        Thread.sleep(2000);
+        webDriver.findElement(By.id("createOffer")).click();
+        Thread.sleep(2000);
+        webDriver.findElement(By.name("title")).sendKeys(testTitle);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("submit")).click();
+
+        Thread.sleep(2000);
+
+        webDriver.get("http://127.0.0.1:8080/twu/");
+        webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
+        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
+
+        assertThat(firstOffer.getText(), is(testTitle));
     }
 
     @After
