@@ -50,8 +50,8 @@
                 <div class="carousel-caption">
                     <h1>Welcome To FeedMyCat</h1>
 
-                    <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi
-                        porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p class="lead">FeedMyCat is an online platform for employees of multi-city companies, who can benefit from
+                        each other by swapping goods or services in an efficient, trusted user base.</p>
                     <div class="offer-button">
                         <a href="offer/create" id="createOffer" class="btn btn-large btn-primary" href="#">Create Offer</a>
                         <a href="offer/browse" id="browse" class="btn btn-large btn-primary" href="#">Browse Offer</a>
