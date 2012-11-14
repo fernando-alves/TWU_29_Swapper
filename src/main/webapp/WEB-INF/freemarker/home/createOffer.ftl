@@ -2,6 +2,7 @@
 <head>
     <meta charset="utf-8">
     <title>Create Offer</title>
+<<<<<<< HEAD
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -9,11 +10,17 @@
     <link href="../../../twu/static/css/bootstrap.css" rel="stylesheet">
     <link href="../../../twu/static/css/swapper/swapper.css" rel="stylesheet">
     <link href="../../../twu/static/css/bootstrap-responsive.css" rel="stylesheet">
+=======
+    <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script src="../../../../twu/static/js/offerValidator.js" type="text/javascript"></script>
+</head>
+>>>>>>> 6ab2b1d... validation using js
 
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 </head>
 <body>
 
+<<<<<<< HEAD
 <div class="container navbar-wrapper">
 
     <div class="navbar navbar-inverse">
@@ -75,6 +82,28 @@
             </form>
         </fieldset>
     </div>
+=======
+<div id="content">
+
+    <fieldset>
+        <legend> ${username} / Add Offer</legend>
+        <form name="user" action="/twu/offer/createAnOffer" method="post">
+            Title: <br/>
+            <input type="text" name="title" maxlength="100"/> <br/>
+            Category: <br/>
+            <select name="category">
+                <option value="Books">Books</option>
+                <option value="Cars">Cars</option>
+                <option value="Housing">Housing</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Services">Services</option>
+            </select><br/>
+            Description:<br/>
+            <textarea rows="4" cols="50" name="description" style="width: 300px; height: 200px; resize: none;" maxlength="1000"></textarea><br/>
+            <input id="submit_form"  type="submit" value="   Save   " name="submit"/>
+        </form>
+    </fieldset>
+>>>>>>> 6ab2b1d... validation using js
 
 </div>
 <div style="clear:both"></div>

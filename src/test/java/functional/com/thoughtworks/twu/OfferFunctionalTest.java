@@ -39,6 +39,41 @@ public class OfferFunctionalTest {
     }
 
     @Test
+    public void shouldNotCreateOfferWithEmptyFields() throws InterruptedException {
+        logIn();
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+
+    @Test
+    public void shouldNotCreateOfferWithBlankTitleFields() throws InterruptedException {
+        logIn();
+        Thread.sleep(1000);
+        webDriver.findElement(By.id("createOffer")).click();
+
+        webDriver.findElement(By.name("title")).sendKeys("   ");
+        webDriver.findElement(By.name("description")).sendKeys("Valid Description");
+
+
+        webDriver.findElement(By.name("submit")).click();
+        Thread.sleep(1000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+
+    @Test
     public void shouldGoToCreateOfferPage() throws InterruptedException {
         logIn();
 
