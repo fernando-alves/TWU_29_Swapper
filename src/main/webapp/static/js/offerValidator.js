@@ -19,13 +19,13 @@ function validateDescription() {
     var actualDescription = document.forms["user"]["descriptionTxt"].value;
 
     if (actualDescription === "") {
-        alert("description can not be empty");
+        alert("Description can not be empty");
         return true;
     }
     actualDescription = trim(actualDescription);
 
     if (actualDescription.length === 0) {
-        alert("description can not be blank");
+        alert("Description can not be blank");
         return true;
     }
 }

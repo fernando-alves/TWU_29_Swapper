@@ -13,8 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Date;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -40,11 +38,50 @@ public class ValidationTest {
     @Test(expected = UnhandledAlertException.class)
     public void shouldNotCreateOfferWithEmptyFields() throws InterruptedException {
         logIn();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
         webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(2000);
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("submit")));
         webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(2000);
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        String alertMsg = webDriver.switchTo().alert().getText();
+        String expectedAlertMsg = " Title can not be empty";
+        assertThat(alertMsg, is(expectedAlertMsg));
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
+
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithBlankTitleFields() throws InterruptedException {
+        logIn();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+
+        webDriver.findElement(By.id("createOffer")).click();
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
+        webDriver.findElement(By.name("title")).sendKeys("   ");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid Description");
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("submit")).click();
+
+
+
+        String alertMsg = webDriver.switchTo().alert().getText();
+        String expectedAlertMsg = "Title cannot be blank";
+
+        assertThat(alertMsg, is(expectedAlertMsg));
 
         String actualTitle = getTitleTagFromPage();
         String expectedTitle = "Create Offer";
@@ -54,14 +91,18 @@ public class ValidationTest {
     }
 
     @Test(expected = UnhandledAlertException.class)
-    public void shouldNotCreateOfferWithBlankTitleFields() throws InterruptedException {
+    public void shouldNotCreateOfferWithBlankDescriptionFields() throws InterruptedException {
         logIn();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
         webDriver.findElement(By.id("createOffer")).click();
 
-        Thread.sleep(2000);
-        webDriver.findElement(By.name("title")).sendKeys("   ");
-        webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid Description");
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
+        webDriver.findElement(By.name("title")).sendKeys("Valid title");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("       ");
 
         Select select = new Select(webDriver.findElement(By.tagName("select")));
         select.selectByValue("Cars");
@@ -69,41 +110,117 @@ public class ValidationTest {
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(2000);
 
+        String alertMsg = webDriver.switchTo().alert().getText();
+        String expectedAlertMsg = "Description can not be blank";
+
+        assertThat(alertMsg, is(expectedAlertMsg));
+
+
         String actualTitle = getTitleTagFromPage();
         String expectedTitle = "Create Offer";
 
         assertThat(actualTitle, is(expectedTitle));
 
     }
-     @Test
-     public void shouldCutTheTitleWhenLongerThan100() throws InterruptedException{
-         logIn();
-         WebDriverWait wait = new WebDriverWait(webDriver, 3000);
-         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
 
-         webDriver.findElement(By.id("createOffer")).click();
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithNoCategorySelect() throws InterruptedException {
+        logIn();
 
-         WebDriverWait waitForCreateOfferPage = new WebDriverWait(webDriver, 3000);
-         waitForCreateOfferPage.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
-         int tooLongTitleLength = 150;
-         String testTitle = RandomStringUtils.randomAlphanumeric(tooLongTitleLength);
-         webDriver.findElement(By.name("title")).sendKeys(testTitle);
-         Select select = new Select(webDriver.findElement(By.tagName("select")));
-         select.selectByValue("Cars");
-         webDriver.findElement(By.name("descriptionTxt")).sendKeys("Long Title");
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+        webDriver.findElement(By.id("createOffer")).click();
 
-         webDriver.findElement(By.name("submit")).click();
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
 
-         wait = new WebDriverWait(webDriver, 3000);
-         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offerTitle")));
+        webDriver.findElement(By.name("title")).sendKeys("Valid title");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid description");
 
-         String offerTitle = webDriver.findElement(By.id("offerTitle")).getText();
+        webDriver.findElement(By.name("submit")).click();
 
-         int expectedTitleLength = 100;
-         assertThat(offerTitle.length(), is(expectedTitleLength));
+        Thread.sleep(2000);
+
+        String alertMsg = webDriver.switchTo().alert().getText();
+        String expectedAlertMsg = "Please select a category";
+
+        assertThat(alertMsg, is(expectedAlertMsg));
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+
+    }
 
 
-     }
+    @Test(expected = UnhandledAlertException.class)
+    public void shouldNotCreateOfferWithEmptyDescription() throws InterruptedException {
+        logIn();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+        webDriver.findElement(By.id("createOffer")).click();
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
+        webDriver.findElement(By.name("title")).sendKeys("Valid title");
+        String emptyDescription = "      ";
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys(emptyDescription);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("submit")).click();
+
+        Thread.sleep(2000);
+
+        String alertMsg = webDriver.switchTo().alert().getText();
+        String expectedAlertMsg = "Description can not be blank";
+
+        assertThat(alertMsg, is(expectedAlertMsg));
+
+        String actualTitle = getTitleTagFromPage();
+        String expectedTitle = "Create Offer";
+
+        assertThat(actualTitle, is(expectedTitle));
+    }
+
+    @Test
+    public void shouldCutTheTitleWhenLongerThan100() throws InterruptedException{
+        logIn();
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+
+        webDriver.findElement(By.id("createOffer")).click();
+
+        WebDriverWait waitForCreateOfferPage = new WebDriverWait(webDriver, 3000);
+        waitForCreateOfferPage.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
+        int tooLongTitleLength = 150;
+        String testTitle = RandomStringUtils.randomAlphanumeric(tooLongTitleLength);
+
+        webDriver.findElement(By.name("title")).sendKeys(testTitle);
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("Long Title");
+
+        webDriver.findElement(By.name("submit")).click();
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offerTitle")));
+
+        String offerTitle = webDriver.findElement(By.id("offerTitle")).getText();
+
+        int expectedTitleLength = 100;
+        assertThat(offerTitle.length(), is(expectedTitleLength));
+
+
+    }
     @Test
     public void shouldCutTheDescriptionWhenLongerThan1000() throws InterruptedException{
         logIn();
@@ -132,83 +249,6 @@ public class ValidationTest {
         assertThat(descriptionTitle.length(), is(expectedTitleLength));
 
 
-    }
-    @Test(expected = UnhandledAlertException.class)
-    public void shouldNotCreateOfferWithBlankDescriptionFields() throws InterruptedException {
-        logIn();
-        Thread.sleep(2000);
-        webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(2000);
-
-        webDriver.findElement(By.name("title")).sendKeys("Valid title");
-        webDriver.findElement(By.name("descriptionTxt")).sendKeys("       ");
-
-        Select select = new Select(webDriver.findElement(By.tagName("select")));
-        select.selectByValue("Cars");
-
-        webDriver.findElement(By.name("submit")).click();
-        Thread.sleep(2000);
-
-        String actualTitle = getTitleTagFromPage();
-        String expectedTitle = "Create Offer";
-
-        assertThat(actualTitle, is(expectedTitle));
-
-    }
-
-    @Test(expected = UnhandledAlertException.class)
-    public void shouldNotCreateOfferWithNoCategorySelect() throws InterruptedException {
-        logIn();
-        Date uniqueDate = new Date();
-        String testTitle = uniqueDate.toString();
-
-        Thread.sleep(2000);
-        webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(2000);
-        webDriver.findElement(By.name("title")).sendKeys(testTitle);
-
-        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
-        webDriver.findElement(By.name("submit")).click();
-
-        Thread.sleep(2000);
-
-        webDriver.get("http://127.0.0.1:8080/twu/");
-        webDriver.findElement(By.id("browse")).click();
-        Thread.sleep(2000);
-        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
-        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
-
-        assertThat(firstOffer.getText(), is(testTitle));
-    }
-
-
-    @Test(expected = UnhandledAlertException.class)
-    public void shouldNotCreateOfferWithEmptyDescription() throws InterruptedException {
-        logIn();
-        Date uniqueDate = new Date();
-        String testTitle = uniqueDate.toString();
-
-        Thread.sleep(2000);
-        webDriver.findElement(By.id("createOffer")).click();
-        Thread.sleep(2000);
-        webDriver.findElement(By.name("title")).sendKeys(testTitle);
-
-        Select select = new Select(webDriver.findElement(By.tagName("select")));
-        select.selectByValue("Cars");
-
-        webDriver.findElement(By.name("submit")).click();
-
-        Thread.sleep(2000);
-
-        webDriver.get("http://127.0.0.1:8080/twu/");
-        webDriver.findElement(By.id("browse")).click();
-        Thread.sleep(2000);
-        WebDriverWait wait = new WebDriverWait(webDriver, 5000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
-        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
-
-        assertThat(firstOffer.getText(), is(testTitle));
     }
 
     @After
