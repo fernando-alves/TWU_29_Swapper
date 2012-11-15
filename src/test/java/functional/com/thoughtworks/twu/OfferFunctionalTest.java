@@ -120,26 +120,6 @@ public class OfferFunctionalTest {
         assertThat(expectedTitle, is(actualTitleText));
     }
 
-//    @Test
-//    public void shouldDisplayOfferDetailsAfterCreating() throws InterruptedException {
-//        logIn();
-//
-//        Thread.sleep(2000);
-//        webDriver.findElement(By.id("createOffer")).click();
-//        Thread.sleep(2000);
-//        webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
-//
-//        Select select = new Select(webDriver.findElement(By.tagName("select")));
-//        select.selectByValue("Cars");
-//
-//        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
-//        webDriver.findElement(By.name("submit")).click();
-//        Thread.sleep(2000);
-//
-//        String offerOwnerEmail = username + "@thoughtworks.com";
-//        assertThat(webDriver.getPageSource().contains(offerOwnerEmail), is(true));
-//    }
-
     @Test
     public void shouldDisplayRequiredOfferDetails() throws InterruptedException {
         logIn();

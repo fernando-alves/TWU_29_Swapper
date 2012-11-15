@@ -23,9 +23,9 @@
 
             <div>
                 <ul class="nav">
-                    <li class="active"><a href="/twu/home">Home</a></li>
-                    <li><a href="offer/create">Create Offer</a></li>
-                    <li><a href="offer/browse">Browse Offer</a></li>
+                    <li class="active" id="homeActive"><a href="/twu/home" id="homeLink">Home</a></li>
+                    <li id="createOfferActive"><a href="offer/create" id="createOfferLink">Create Offer</a></li>
+                    <li id="browseOfferActive"><a href="offer/browse" id="browseOfferLink">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
                     <li><a id="username">Welcome, ${username}</a></li>
