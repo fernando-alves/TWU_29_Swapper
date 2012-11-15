@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class UIFunctionalTest {
@@ -68,14 +67,26 @@ public class UIFunctionalTest {
     @Test
     public void shouldCheckFocusOfBrowseOfferFromNavigationBar() throws InterruptedException {
         logIn();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 1000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("browseOfferLink")));
+
         webDriver.findElement(By.id("browseOfferLink")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("browseOfferActive")));
 
         WebElement browseOfferActive = webDriver.findElement(By.id("browseOfferActive"));
 
         assertThat(browseOfferActive.getAttribute("class").contains("active"), is(true));
 
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("homeActive")));
+
         WebElement homeActive = webDriver.findElement(By.id("homeActive"));
+
         assertThat(homeActive.getAttribute("class").contains("active"), is(false));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOfferActive")));
 
         WebElement createOfferActive = webDriver.findElement(By.id("createOfferActive"));
         assertThat(createOfferActive.getAttribute("class").contains("active"), is(false));

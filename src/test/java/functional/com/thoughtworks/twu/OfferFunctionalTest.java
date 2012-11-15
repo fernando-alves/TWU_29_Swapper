@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Date;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -124,16 +125,19 @@ public class OfferFunctionalTest {
     public void shouldDisplayRequiredOfferDetails() throws InterruptedException {
         logIn();
 
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
         webDriver.findElement(By.id("browse")).click();
-        Thread.sleep(2000);
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
 
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
         String firstOfferTitle = firstOffer.getText();
         firstOffer.click();
-        Thread.sleep(2000);
 
-        assertThat(webDriver.getPageSource().contains(firstOfferTitle), is(true));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offerTitle")));
+        WebElement offerTitleElement = webDriver.findElement(By.id("offerTitle"));
+        assertThat(offerTitleElement.getText(), is(equalTo(firstOfferTitle)));
 
     }
 
@@ -141,17 +145,34 @@ public class OfferFunctionalTest {
     public void shouldGoToViewAnOfferPageFromBrowse() throws InterruptedException {
         logIn();
 
-        Thread.sleep(2000);
-        webDriver.findElement(By.id("browse")).click();
-        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
 
+        webDriver.findElement(By.id("createOffer")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
+        webDriver.findElement(By.name("title")).sendKeys("TITLE IN TEST");
+
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys("To pass the test or not, this is a question");
+        webDriver.findElement(By.name("submit")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("homeLink")));
+        webDriver.findElement(By.id("homeLink")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("browse")));
+        webDriver.findElement(By.id("browse")).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offer1")));
         webDriver.findElement(By.id("offer1")).click();
-        Thread.sleep(2000);
 
         String actualTitleText = getTitleTagFromPage();
 
         String expectedTitle = "View An Offer";
-        assertThat(expectedTitle, is(actualTitleText));
+        assertThat(actualTitleText, is(expectedTitle));
     }
 
     @Test

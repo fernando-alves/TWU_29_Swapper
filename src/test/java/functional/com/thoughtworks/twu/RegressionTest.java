@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -69,22 +71,49 @@ public class RegressionTest {
         expectedTitle = "View An Offer";
         assertThat(expectedTitle, Is.is(actualTitleText));
 
-//        gotoBrowseAllFromNavBar();
-//
-//        selectAnOffer();
-//        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
-//
-//        assertThat(firstOffer.getText(), Is.is("TITLE IN TEST"));
-////
-//        takeDownOffer();
-//
-//        gotoBrowseAllFromButton();
-//
-//        selectOfferNotYours(OfferId);
-//
-//        contactOfferHolder();
-//
-//
+        gotoBrowseAllFromNavBar();
+        actualTitleText = getTitleTagFromPage();
+        expectedTitle = "Browse Offers";
+        assertThat(actualTitleText, Is.is(expectedTitle));
+        List<WebElement> initialList = webDriver.findElements(By.className("offer"));
+
+
+        selectAnOffer();
+        WebElement firstOffer = webDriver.findElement(By.id("offer1"));
+
+        assertThat(firstOffer.getText(), Is.is("TITLE IN TEST"));
+        firstOffer.click();
+        actualTitleText = getTitleTagFromPage();
+
+        expectedTitle = "View An Offer";
+        assertThat(expectedTitle, Is.is(actualTitleText));
+
+
+        takeDownOffer();
+        actualTitleText = getTitleTagFromPage();
+        String expectedPageTitle = "Home";
+        assertThat(actualTitleText, Is.is(expectedPageTitle));
+
+        gotoBrowseAllFromButton();
+        actualTitleText = getTitleTagFromPage();
+        expectedTitle = "Browse Offers";
+        assertThat(actualTitleText, Is.is(expectedTitle));
+
+        List<WebElement> offerList = webDriver.findElements(By.className("offer"));
+        assertThat(offerList.size(), Is.is(initialList.size()-1));
+
+    }
+
+    private void gotoBrowseAllFromButton() throws InterruptedException {
+        webDriver.findElement(By.id("browse")).click();
+        Thread.sleep(2000);
+
+
+    }
+
+    private void takeDownOffer() throws InterruptedException {
+        webDriver.findElement(By.id("takeDownButton")).click();
+        Thread.sleep(2000);
 
     }
 
@@ -96,8 +125,9 @@ public class RegressionTest {
 
     }
 
-    private void gotoBrowseAllFromNavBar() {
-        webDriver.findElement(By.id(""));
+    private void gotoBrowseAllFromNavBar() throws InterruptedException {
+        webDriver.findElement(By.id("browseOfferLink")).click();
+        Thread.sleep(2000);
     }
 
     private void saveOffer() throws InterruptedException {
