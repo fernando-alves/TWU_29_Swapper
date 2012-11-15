@@ -75,10 +75,12 @@
                     <textarea rows="4" cols="50" name="descriptionTxt" placeholder="Description"
                               maxlength="1000"></textarea>
                 </p><input class="btn btn-primary" type="submit" value="   Save   " name="submit"/>
+                <div id="emailMessage">
                 <br/>
-                <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
+                    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
                 <br/>
                 Please ensure that the emails from this id don't end up in the spam folder.
+                </div>
             </form>
             </fieldset>
         </div>

@@ -23,9 +23,9 @@
 
             <div>
                 <ul class="nav">
-                    <li><a href="/twu/home">Home</a></li>
-                    <li><a href="create">Create Offer</a></li>
-                    <li><a href="browse">Browse Offer</a></li>
+                    <li id="homeActive"><a href="/twu/home" id="homeLink">Home</a></li>
+                    <li id="createOfferActive"><a href="create" id="createOfferLink">Create Offer</a></li>
+                    <li id="browseOfferActive"><a href="browse" id="browseOfferLink">Browse Offer</a></li>
                 </ul>
                 <ul class="nav pull-right">
                     <li><a id="username">Welcome, ${username}</a></li>                </ul>
@@ -82,9 +82,11 @@
                 <input type="submit" class="btn btn-primary" value="  Contact  "/>
             </#if>
             </form>
+            <div id="emailMessage"
             <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
             <br/>
             Please ensure that the emails from this id don't end up in the spam folder.
+            </div>
         </div>
         </div>
     </div>
