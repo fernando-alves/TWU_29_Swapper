@@ -52,12 +52,16 @@
 
     <div class="content-position">
         <div class="content-position-information">
-        <h1>${theOffer.title}</h1>
+        <div class="display-offer">
+            <h1>${theOffer.title}</h1>
+        </div>
             </br>
             <span class="label label-info">${theOffer.category}</span>
             </br>
             </br>
-            <p>${theOffer.description}</p>
+            <div class="display-offer">
+                <p>${theOffer.description}</p>
+            </div>
             </br>
             </br>
             <div>
