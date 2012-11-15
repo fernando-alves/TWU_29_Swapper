@@ -57,11 +57,12 @@
                 </#list>
             </ol>
         </div>
+        <br/>
+        <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
+        <br/>
+        Please ensure that the emails from this id don't end up in the spam folder.
     </div>
-    <br/>
-    <b>Note:</b> We send emails from <b>twufeedmycat@gmail.com</b> to the user when you have to contact them.
-    <br/>
-    Please ensure that the emails from this id don't end up in the spam folder.
+
 </div>
 <div style="clear:both"></div>
 <footer>
