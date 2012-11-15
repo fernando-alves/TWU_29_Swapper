@@ -53,7 +53,7 @@
     <div class="content-position">
         <div class="content-position-information">
         <div class="display-offer">
-            <h1>${theOffer.title}</h1>
+            <h1 id="offerTitle">${theOffer.title}</h1>
         </div>
             </br>
             <span class="label label-info">${theOffer.category}</span>

@@ -62,6 +62,8 @@ public class ValidationTest {
         webDriver.findElement(By.name("title")).sendKeys("   ");
         webDriver.findElement(By.name("descriptionTxt")).sendKeys("Valid Description");
 
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
 
         webDriver.findElement(By.name("submit")).click();
         Thread.sleep(2000);
@@ -72,6 +74,33 @@ public class ValidationTest {
         assertThat(actualTitle, is(expectedTitle));
 
     }
+     @Test
+     public void shouldCutTheTitleWhenLongerThan100() throws InterruptedException{
+         logIn();
+         WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+
+         webDriver.findElement(By.id("createOffer")).click();
+
+         WebDriverWait waitForCreateOfferPage = new WebDriverWait(webDriver, 3000);
+         waitForCreateOfferPage.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+         webDriver.findElement(By.name("title")).sendKeys("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+         Select select = new Select(webDriver.findElement(By.tagName("select")));
+         select.selectByValue("Cars");
+         webDriver.findElement(By.name("descriptionTxt")).sendKeys("Long Title");
+
+         webDriver.findElement(By.name("submit")).click();
+
+         wait = new WebDriverWait(webDriver, 3000);
+         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offerTitle")));
+
+         String offerTitle = webDriver.findElement(By.id("offerTitle")).getText();
+
+         int expectedTitleLength = 100;
+         assertThat(offerTitle.length(), is(expectedTitleLength));
+
+
+     }
     @Test(expected = UnhandledAlertException.class)
     public void shouldNotCreateOfferWithBlankDescriptionFields() throws InterruptedException {
         logIn();
@@ -120,6 +149,7 @@ public class ValidationTest {
 
         assertThat(firstOffer.getText(), is(testTitle));
     }
+
 
     @Test(expected = UnhandledAlertException.class)
     public void shouldNotCreateOfferWithEmptyDescription() throws InterruptedException {
