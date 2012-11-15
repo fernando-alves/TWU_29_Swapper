@@ -60,7 +60,7 @@
             </br>
             </br>
             <div class="display-offer">
-                <p>${theOffer.description}</p>
+                <p id = "descriptionTxt">${theOffer.description}</p>
             </div>
             </br>
             </br>

@@ -1,5 +1,6 @@
 package functional.com.thoughtworks.twu;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -84,7 +85,9 @@ public class ValidationTest {
 
          WebDriverWait waitForCreateOfferPage = new WebDriverWait(webDriver, 3000);
          waitForCreateOfferPage.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
-         webDriver.findElement(By.name("title")).sendKeys("0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789");
+         int tooLongTitleLength = 150;
+         String testTitle = RandomStringUtils.randomAlphanumeric(tooLongTitleLength);
+         webDriver.findElement(By.name("title")).sendKeys(testTitle);
          Select select = new Select(webDriver.findElement(By.tagName("select")));
          select.selectByValue("Cars");
          webDriver.findElement(By.name("descriptionTxt")).sendKeys("Long Title");
@@ -101,6 +104,35 @@ public class ValidationTest {
 
 
      }
+    @Test
+    public void shouldCutTheDescriptionWhenLongerThan1000() throws InterruptedException{
+        logIn();
+        WebDriverWait wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("createOffer")));
+
+        webDriver.findElement(By.id("createOffer")).click();
+
+        WebDriverWait waitForCreateOfferPage = new WebDriverWait(webDriver, 3000);
+        waitForCreateOfferPage.until(ExpectedConditions.visibilityOfElementLocated(By.name("descriptionTxt")));
+        int tooLongTitleLength = 1500;
+        String testTitle = RandomStringUtils.randomAlphanumeric(tooLongTitleLength);
+        webDriver.findElement(By.name("title")).sendKeys("Test for long description");
+        Select select = new Select(webDriver.findElement(By.tagName("select")));
+        select.selectByValue("Cars");
+        webDriver.findElement(By.name("descriptionTxt")).sendKeys(testTitle);
+
+        webDriver.findElement(By.name("submit")).click();
+
+        wait = new WebDriverWait(webDriver, 3000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("offerTitle")));
+
+        String descriptionTitle = webDriver.findElement(By.id("descriptionTxt")).getText();
+
+        int expectedTitleLength = 1000;
+        assertThat(descriptionTitle.length(), is(expectedTitleLength));
+
+
+    }
     @Test(expected = UnhandledAlertException.class)
     public void shouldNotCreateOfferWithBlankDescriptionFields() throws InterruptedException {
         logIn();

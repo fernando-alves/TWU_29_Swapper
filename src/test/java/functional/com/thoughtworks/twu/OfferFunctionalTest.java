@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -64,6 +63,10 @@ public class OfferFunctionalTest {
         logIn();
 
         webDriver.findElement(By.id("createOffer")).click();
+
+        WebDriverWait wait = new WebDriverWait(webDriver, 1000);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("title")));
+
         WebElement titleTextBox = webDriver.findElement(By.name("title"));
 
         assertThat(titleTextBox.isDisplayed(), is(true));
