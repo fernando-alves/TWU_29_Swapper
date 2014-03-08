@@ -88,11 +88,18 @@ functionalTest.doLast {
 }
 
 project.ext {
-    dbDriver = 'com.mysql.jdbc.Driver'
-    dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
-    dbUrl = 'jdbc:mysql://' + dbHostName + ':3306/swap?characterEncoding=utf-8'
-    dbUsername = 'root'
-    dbPassword = rootProject.hasProperty('dbPassword') ? dbPassword : ''
+
+    if (System.env('CI')) {
+      dbUrl = 'mysql://go:go@localhost:3306/app_test'
+      dbUsername = 'go'
+      dbPassword = 'go'
+    } else {
+      dbDriver = 'com.mysql.jdbc.Driver'
+      dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
+      dbUrl = 'jdbc:mysql://' + dbHostName + ':3306/swap?characterEncoding=utf-8'
+      dbUsername = 'root'
+      dbPassword = rootProject.hasProperty('dbPassword') ? dbPassword : ''
+    }
 }
 
 
