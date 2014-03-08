@@ -89,12 +89,12 @@ functionalTest.doLast {
 
 project.ext {
 
-    if (System.env('CI')) {
+    dbDriver = 'com.mysql.jdbc.Driver'
+    if (System.getenv("CI")) {
       dbUrl = 'mysql://go:go@localhost:3306/app_test'
       dbUsername = 'go'
       dbPassword = 'go'
     } else {
-      dbDriver = 'com.mysql.jdbc.Driver'
       dbHostName =  rootProject.hasProperty('dbHost') ? dbHost : 'localhost'
       dbUrl = 'jdbc:mysql://' + dbHostName + ':3306/swap?characterEncoding=utf-8'
       dbUsername = 'root'
@@ -121,7 +121,7 @@ task updatedb << {
 task resetdb << {
 
     ant.sql(driver: dbDriver,
-            url: 'jdbc:mysql://'+dbHostName+':3306/',
+            url: dbUrl,
             userid: dbUsername,
             password: dbPassword,
             encoding: 'UTF-8',
