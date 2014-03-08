@@ -91,7 +91,7 @@ project.ext {
 
     dbDriver = 'com.mysql.jdbc.Driver'
     if (System.getenv("CI")) {
-      dbUrl = 'mysql://go:go@localhost:3306/app_test'
+      dbUrl = 'jdbc:mysql://go:go@localhost:3306/app_test'
       dbUsername = 'go'
       dbPassword = 'go'
     } else {
