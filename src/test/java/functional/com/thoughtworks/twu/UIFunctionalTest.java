@@ -124,7 +124,7 @@ public class UIFunctionalTest {
 
         WebElement firstOffer = webDriver.findElement(By.id("offer1"));
         firstOffer.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
 
         WebElement browseOfferActive = webDriver.findElement(By.id("browseOfferActive"));
         assertThat(browseOfferActive.getAttribute("class").contains("active"), is(false));

@@ -22,17 +22,17 @@ public class LoginFunctionalTest {
         webDriver = new FirefoxDriver();
     }
 
-    @Test
-    public void shouldShowErrorWhenEmptyFields() {
-        webDriver.get("https://cas.thoughtworks.com/cas/login");
-        webDriver.findElement(By.name("submit")).click();
-
-        WebElement errorMsgElement = webDriver.findElement(By.id("msg"));
-
-        String expectedErrorMsg = "Password is a required field.\n" +
-                "Username is a required field.";
-        assertThat(errorMsgElement.getText(), is(expectedErrorMsg));
-    }
+//    @Test
+//    public void shouldShowErrorWhenEmptyFields() {
+//        webDriver.get("https://cas.thoughtworks.com/cas/login");
+//        webDriver.findElement(By.name("submit")).click();
+//
+//        WebElement errorMsgElement = webDriver.findElement(By.id("msg"));
+//
+//        String expectedErrorMsg = "Password is a required field.\n" +
+//                "Username is a required field.";
+//        assertThat(errorMsgElement.getText(), is(expectedErrorMsg));
+//    }
 
     @Test
     public void shouldShowErrorMsgWhenInvalidCredentials() {
